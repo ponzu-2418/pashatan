@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <title>パシャ単</title>
+    </head>
+    <body>
+        <section id="screen-title" class="screen active titeletop">
+            <div class="top">
+                <svg class="mascot" width="168" height="140" viewBox="0 0 120 100" aria-hidden="true">
+                    <rect x="38" y="8" width="30" height="16" rx="6" fill="#3b3531"/>
+                    <rect x="8" y="18" width="104" height="74" rx="22" fill="#ef5a2c" stroke="#3b3531" stroke-width="4"/>
+                    <rect x="88" y="28" width="12" height="8" rx="3" fill="#ffd66b" stroke="#3b3531" stroke-width="3"/>
+                    <circle cx="60" cy="58" r="24" fill="#fffaf3" stroke="#3b3531" stroke-width="4"/>
+                    <circle cx="51" cy="54" r="4" fill="#3b3531"/>
+                    <circle cx="69" cy="54" r="4" fill="#3b3531"/>
+                    <circle cx="45" cy="63" r="3.5" fill="#ffb3a0"/>
+                    <circle cx="75" cy="63" r="3.5" fill="#ffb3a0"/>
+                    <path d="M53 64 q7 7 14 0" stroke="#3b3531" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                </svg>
+                <h1 id="title">パシャ<span>単</span></h1>
+                <p id="sub-title">パシャっと英単語アプリ</p>
+            </div>
+            <div class="bottom">
+                <label for="photo-input" class="main-button">写真を撮る</label>
+                <input type="file" id="photo-input" accept="image/*" capture="environment" hidden>
+                <button id="record" class="sub-button">記録を見る</button>
+            </div>
+            <p id="error"></p>
+        </section>
+
+        <section id="screen-judge" class="screen">
+            <svg class="judge-mascot" width="168" height="140" viewBox="0 0 120 100" aria-hidden="true"><rect x="38" y="8" width="30" height="16" rx="6" fill="#3b3531"/><rect x="8" y="18" width="104" height="74" rx="22" fill="#ef5a2c" stroke="#3b3531" stroke-width="4"/><rect x="88" y="28" width="12" height="8" rx="3" fill="#ffd66b" stroke="#3b3531" stroke-width="3"/><circle cx="60" cy="58" r="24" fill="#fffaf3" stroke="#3b3531" stroke-width="4"/><circle cx="51" cy="54" r="4" fill="#3b3531"/><circle cx="69" cy="54" r="4" fill="#3b3531"/><circle cx="45" cy="63" r="3.5" fill="#ffb3a0"/><circle cx="75" cy="63" r="3.5" fill="#ffb3a0"/><path d="M53 64 q7 7 14 0" stroke="#3b3531" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+            <h1>判定中...</h1>
+        </section>
+
+        <section id="screen-quiz" class="screen">
+            <img id="photo" src="" alt="撮影した写真">
+            <div class ="quiz-title">
+                <svg class="mascot-small" width="72" height="60" viewBox="0 0 120 100" aria-hidden="true"><rect x="38" y="8" width="30" height="16" rx="6" fill="#3b3531"/><rect x="8" y="18" width="104" height="74" rx="22" fill="#ef5a2c" stroke="#3b3531" stroke-width="5"/><rect x="88" y="28" width="12" height="8" rx="3" fill="#ffd66b" stroke="#3b3531" stroke-width="4"/><circle cx="60" cy="58" r="24" fill="#fffaf3" stroke="#3b3531" stroke-width="5"/><circle cx="51" cy="54" r="4.5" fill="#3b3531"/><circle cx="69" cy="54" r="4.5" fill="#3b3531"/><circle cx="45" cy="63" r="3.5" fill="#ffb3a0"/><circle cx="75" cy="63" r="3.5" fill="#ffb3a0"/><path d="M53 64 q7 7 14 0" stroke="#3b3531" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+                <h1 class="quiz-question">これを英語で言うと?</h1>
+            </div>
+            <div class="quiz-box">
+                <button id="quiz1" class="quiz">cup</button>
+                <button id="quiz2" class="quiz">apple</button>
+                <button id="quiz3" class="quiz">button</button>
+                <button id="quiz4" class="quiz">transformation</button>
+            </div>
+        </section>
+
+        <section id="screen-result" class="screen">
+            <div class="top">
+                <div class="result-header">
+                    <svg class="mascot-small" width="72" height="60" viewBox="0 0 120 100" aria-hidden="true"><rect x="38" y="8" width="30" height="16" rx="6" fill="#3b3531"/><rect x="8" y="18" width="104" height="74" rx="22" fill="#ef5a2c" stroke="#3b3531" stroke-width="5"/><rect x="88" y="28" width="12" height="8" rx="3" fill="#ffd66b" stroke="#3b3531" stroke-width="4"/><circle cx="60" cy="58" r="24" fill="#fffaf3" stroke="#3b3531" stroke-width="5"/><circle cx="51" cy="54" r="4.5" fill="#3b3531"/><circle cx="69" cy="54" r="4.5" fill="#3b3531"/><circle cx="45" cy="63" r="3.5" fill="#ffb3a0"/><circle cx="75" cy="63" r="3.5" fill="#ffb3a0"/><path d="M53 64 q7 7 14 0" stroke="#3b3531" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+                    <h1 id="correct">不正解!</h1> 
+                </div>
+                <div class="word-card">
+                    <h1 id="word">transformation</h1> 
+                    <p id="japanese">変換</p>
+                    <p id="explan">あいうえおかきくけこさしすせそたちつてと</p>
+                </div>
+            </div>
+            <div class="bottom">
+                <label for="photo-input" class="main-button">もう一度写真を撮る</label>
+                <button class="title sub-button">タイトルへ</button>
+            </div>
+        </section>
+
+        <section id="screen-record" class="screen">
+            <h1>単語帳</h1>
+            <p id="record-day"></p>
+            <p id="rate"></p>
+            <ul id="record-list"></ul>
+            <button class="title sub-button">タイトルへ</button>
+        </section>
+    </body>
+</html>
