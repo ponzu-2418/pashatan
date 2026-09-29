@@ -4,3 +4,4 @@ photos/
 *.pt
 *.bin
 .vscode/
+.venv/
