@@ -4,6 +4,10 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+import random
+from datetime import datetime
+from PIL import Image
+from clip_model import load_words, ClipJudge
 
 app = FastAPI()
 
@@ -19,6 +23,11 @@ app.add_middleware(
 os.makedirs("photos", exist_ok=True)
 app.mount("/photos", StaticFiles(directory="photos"), name="photos")
 
+# サーバー起動時に1回だけ準備する
+WORDS = load_words()
+judge = ClipJudge(WORDS)
+QUIZZES = {}   # quiz_id → 正解と写真の場所を覚えておく辞書
+next_id = 1
 
 # /answer に送られてくるデータの形
 class Answer(BaseModel):
@@ -34,11 +43,26 @@ def hello():
 # ① 写真からクイズを作る
 @app.post("/quiz")
 def create_quiz(image: UploadFile = File(...)):
-    # 仮：写真は受け取るだけで、まだ使わない
-    return {
-        "quiz_id": 1,
-        "choices": ["cup", "bottle", "vase", "bowl"],
-    }
+    global next_id
+    quiz_id = next_id
+    next_id += 1
+
+    # 写真を開いて photos フォルダに保存する（名前は日時にして重ならないようにする）
+    img = Image.open(image.file).convert("RGB")
+    filename = datetime.now().strftime("%Y%m%d_%H%M%S") + f"_{quiz_id}.jpg"
+    img.save(f"photos/{filename}")
+
+    # CLIP で上位4つを出し、1位を正解にする
+    top = judge.top4(img)
+    choices = [word for word, score in top]
+    answer = choices[0]
+
+    # 正解を覚えておく
+    QUIZZES[quiz_id] = {"answer": answer, "image_url": f"/photos/{filename}"}
+
+    # 選択肢を混ぜて返す（混ぜないと、いつも1番目が正解になってしまう）
+    random.shuffle(choices)
+    return {"quiz_id": quiz_id, "choices": choices}
 
 
 # ② 答え合わせ
