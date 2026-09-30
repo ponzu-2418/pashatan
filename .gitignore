@@ -5,3 +5,4 @@ photos/
 *.bin
 .vscode/
 .venv/
+records.csv

@@ -8,6 +8,7 @@ import random
 from datetime import datetime
 from PIL import Image
 from clip_model import load_words, ClipJudge
+from records import load_records, save_record, calc_streak
 
 app = FastAPI()
 
@@ -68,21 +69,30 @@ def create_quiz(image: UploadFile = File(...)):
 # ② 答え合わせ
 @app.post("/answer")
 def check_answer(data: Answer):
-    # 整理券の控えから、この問題を探す
-    quiz = QUIZZES.get(data.quiz_id)
+    # 問題を取り出す（pop なので、同じ問題に2回は答えられない）
+    quiz = QUIZZES.pop(data.quiz_id, None)
     if quiz is None:
         raise HTTPException(status_code=404, detail=f"quiz_id {data.quiz_id} が見つかりません")
 
     answer = quiz["answer"]
     info = WORDS[answer]
+    correct = data.choice == answer
+
+    # 今日の1問目かどうか（エフェクト用）を、記録する前に調べておく
+    today = datetime.now().strftime("%Y-%m-%d")
+    first_today = not any(r["datetime"].startswith(today) for r in load_records())
+
+    # 記録して、連続日数を数える
+    save_record(answer, correct, quiz["image_url"])
+    streak = calc_streak(load_records())
 
     return {
-        "correct": data.choice == answer,
+        "correct": correct,
         "answer": answer,
         "japanese": info["japanese"],
         "explanation": info["explanation"],
-        "streak": 3,        # 仮（次のステップで本物にする）
-        "streak_up": True,  # 仮
+        "streak": streak,
+        "streak_up": first_today,
     }
 
 
