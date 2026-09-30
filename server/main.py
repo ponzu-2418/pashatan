@@ -1,6 +1,6 @@
 # server/main.py（仮サーバー：決まった値を返すだけ）
 import os
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -68,14 +68,21 @@ def create_quiz(image: UploadFile = File(...)):
 # ② 答え合わせ
 @app.post("/answer")
 def check_answer(data: Answer):
-    # 仮：正解はいつも cup
+    # 整理券の控えから、この問題を探す
+    quiz = QUIZZES.get(data.quiz_id)
+    if quiz is None:
+        raise HTTPException(status_code=404, detail=f"quiz_id {data.quiz_id} が見つかりません")
+
+    answer = quiz["answer"]
+    info = WORDS[answer]
+
     return {
-        "correct": data.choice == "cup",
-        "answer": "cup",
-        "japanese": "カップ",
-        "explanation": "飲み物を入れる取っ手付きの器。TOEICでは給湯室やカフェの場面で出る。",
-        "streak": 3,
-        "streak_up": True,
+        "correct": data.choice == answer,
+        "answer": answer,
+        "japanese": info["japanese"],
+        "explanation": info["explanation"],
+        "streak": 3,        # 仮（次のステップで本物にする）
+        "streak_up": True,  # 仮
     }
 
 
