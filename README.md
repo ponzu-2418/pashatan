@@ -18,6 +18,6 @@
 - 自分のフォルダ以外は触らない
 - 動かない状態ではプッシュしない
 
-ターミナルが開くたびにする
+## ターミナルが開くたびにする
 cd C:\oit\home\python\pashatan\server
 $env:PYTHONPATH = ""
