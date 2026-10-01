@@ -1,4 +1,4 @@
-const SERVER = "https://examine-residents-sponsor-base.trycloudflare.com";
+const SERVER = "https://char-occurrence-wells-termination.trycloudflare.com"
 
 function showScreen(id){
     const screens = document.querySelectorAll(".screen");
@@ -22,15 +22,23 @@ function showQuestion(quiz){
 let quizId = null;
 
 async function createQuiz(file){
-    const form = new FormData();
-    form.append("image",file);
-    const res = await fetch(SERVER + "/quiz", {
-        method: "POST",
-        body: form
+    try{
+        const form = new FormData();
+        form.append("image",file);
+        const res = await fetch(SERVER + "/quiz", {
+            method: "POST",
+            body: form
     });
+    if (!res.ok){
+        throw new Error("サーバーに断られました");
+    }
     const quiz = await res.json();
     quizId = quiz.quiz_id;
     showQuestion(quiz);
+    }catch(error){
+        console.error(error);
+        showError("うまくいきませんでした。もう一度撮ってね。");
+    }
 }
 
 function showResult(result){
@@ -54,6 +62,12 @@ async function sendAnswer(choice){
     const result = await res.json();
     showResult(result);
 }
+
+function showError(message){
+    showScreen("screen-title");
+    errorText = message;
+}
+
 console.log("パシャ単を起動しました");
 const recordButton = document.getElementById("record");
 const errorText = document.getElementById("error");
