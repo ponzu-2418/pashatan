@@ -8,7 +8,7 @@
         <title>パシャ単</title>
     </head>
     <body>
-        <section id="screen-title" class="screen active titeletop">
+        <section id="screen-title" class="screen titeletop">
             <div class="top">
                 <svg class="mascot" width="168" height="140" viewBox="0 0 120 100" aria-hidden="true">
                     <rect x="38" y="8" width="30" height="16" rx="6" fill="#3b3531"/>
@@ -69,12 +69,30 @@
             </div>
         </section>
 
-        <section id="screen-record" class="screen">
-            <h1>単語帳</h1>
-            <p id="record-day"></p>
-            <p id="rate"></p>
-            <ul id="record-list"></ul>
-            <button class="title sub-button">タイトルへ</button>
+        <section id="screen-record" class="screen active">
+            <div class="top">
+                <h1 id="kiroku">記録</h1>
+                <div class="record-card">
+                    <div class="day">
+                        <p class="stat-label">連続</p>
+                        <p id="record-day">3日</p>
+                    </div>
+                    <div class ="rate">
+                        <p class="stat-label">正答率</p>            
+                        <p id="answer-rate">76%</p>
+                    </div>
+                </div>
+            </div>
+            <ul id="record-list" class="top">
+                <li class="word-item">
+                    <img class="word-photo" src="" alt="">
+                    <div class="word-text">
+                        <p class="word-en">cup</p>
+                        <p class="word-ja">カップ</p>
+                    </div>
+                </li>
+            </ul>
+            <button class="title sub-button bottom">タイトルへ</button>
         </section>
     </body>
 </html>
