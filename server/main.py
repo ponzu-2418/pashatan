@@ -29,6 +29,7 @@ WORDS = load_words()
 judge = ClipJudge(WORDS)
 QUIZZES = {}   # quiz_id → 正解と写真の場所を覚えておく辞書
 next_id = 1
+MIN_SCORE = 0.3   # 1位の確率がこれより低ければ「認識できない」とする
 
 # /answer に送られてくるデータの形
 class Answer(BaseModel):
@@ -45,27 +46,32 @@ def hello():
 @app.post("/quiz")
 def create_quiz(image: UploadFile = File(...)):
     global next_id
+
+    # 写真を開いて、CLIP で上位4つを出す
+    img = Image.open(image.file).convert("RGB")
+    img.thumbnail((800, 800))
+    top = judge.top4(img)
+    print("判定結果:", [(w, round(s, 2)) for w, s in top], flush=True)   # 調整用に表示
+
+    # 1位の確率が低すぎたら、問題を作らずにエラーを返す
+    if top[0][1] < MIN_SCORE:
+        raise HTTPException(
+            status_code=400,
+            detail="うまく認識できませんでした。物を大きく写して、もう一度撮ってください。",
+        )
+
+    # ここから先は今までと同じ
     quiz_id = next_id
     next_id += 1
-
-    # 写真を開いて photos フォルダに保存する（名前は日時にして重ならないようにする）
-    img = Image.open(image.file).convert("RGB")
-    img.thumbnail((800, 800))   # ← 追加：長い辺が800ピクセルになるよう縮める
     filename = datetime.now().strftime("%Y%m%d_%H%M%S") + f"_{quiz_id}.jpg"
-    img.save(f"photos/{filename}", quality=80)   # ← quality=80 を追加
-    
-    # CLIP で上位4つを出し、1位を正解にする
-    top = judge.top4(img)
+    img.save(f"photos/{filename}", quality=80)
+
     choices = [word for word, score in top]
     answer = choices[0]
-
-    # 正解を覚えておく
     QUIZZES[quiz_id] = {"answer": answer, "image_url": f"/photos/{filename}"}
 
-    # 選択肢を混ぜて返す（混ぜないと、いつも1番目が正解になってしまう）
     random.shuffle(choices)
     return {"quiz_id": quiz_id, "choices": choices}
-
 
 # ② 答え合わせ
 @app.post("/answer")
