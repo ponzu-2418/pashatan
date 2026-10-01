@@ -54,27 +54,91 @@ function showResult(result){
 }
 
 async function sendAnswer(choice){
-    const res = await fetch(SERVER + "/answer",{
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({quiz_id: quizId, choice: choice})
-    });
-    const result = await res.json();
-    showResult(result);
+    try {
+        const res = await fetch(SERVER + "/answer", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ quiz_id: quizId, choice: choice })
+        });
+        if (!res.ok) {
+            throw new Error("サーバーに断られました");
+        }
+        const result = await res.json();
+        showResult(result);
+    } catch (error) {
+        console.error(error);
+        showError("答え合わせに失敗しました。もう一度撮ってね。");
+    }
 }
 
 function showError(message){
     showScreen("screen-title");
-    errorText = message;
+    errorText.textContent = message;
 }
 
+async function loadStats(){
+    try{
+        const res = await fetch(SERVER + "/stats");
+        if(!res.ok){
+            throw new Error("サーバーに断られました");
+        }
+        const stats=await res.json();
+        document.getElementById("record-day").textContent = stats.streak + "日";
+        document.getElementById("answer-rate").textContent = Math.round(stats.accuracy * 100)+"%";
+        
+    }catch(error){
+        console.error(error);
+        showError("記録を読み込めませんでした。");
+    }
+}
+
+async function loadWords(){
+    try{
+        const res = await fetch(SERVER + "/words");
+        if (!res.ok){
+            throw new Error("サーバーに断られました");
+        }
+        const words = await res.json();
+
+        const list = document.getElementById("record-list");
+        
+        words.forEach((w) => {
+            const img = document.createElement("img");
+            img.className = "word-photo";
+            img.src = SERVER + w.image_url;
+            img.alt = w.word;
+
+            const en = document.createElement("p");
+            en.className = "word-en";
+            en.textContent = w.word;
+
+            const ja = document.createElement("p");
+            ja.className= "word-ja"
+            ja.textContent = w.japanese;
+
+            const text = document.createElement("div");
+            text.className ="word-text";
+            text.append(en,ja);
+
+            const li = document.createElement("li");
+            li.className = "word-item";
+            li.append(img,text);
+
+            list.append(li);
+        });
+    }catch(error){
+        console.error(error);
+        showError("単語帳を読み込めませんでした。");
+    }
+}
 console.log("パシャ単を起動しました");
 const recordButton = document.getElementById("record");
 const errorText = document.getElementById("error");
 
 recordButton.addEventListener("click" , () =>{
-    console.log("記録ボタンが押された");
     showScreen("screen-record");
+    loadStats();
+    loadWords();
 });
 
 const titleScreen = document.getElementById("screen-title");
@@ -93,6 +157,7 @@ const photo = document.getElementById("photo");
 photoInput.addEventListener("change", () => {
     const file = photoInput.files[0];
     photoInput.value = "";
+    errorText.textContent="";
     photo.src = URL.createObjectURL(file);
     showScreen("screen-judge");
     createQuiz(file);     
