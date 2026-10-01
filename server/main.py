@@ -142,3 +142,6 @@ def get_words():
 
     # 最後に出た日が新しい順に並べる
     return sorted(book.values(), key=lambda b: b["last_seen"], reverse=True)
+
+# 相方の画面（front フォルダ）を /app で見られるようにする
+app.mount("/app", StaticFiles(directory="../front", html=True), name="front")
