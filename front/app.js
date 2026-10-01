@@ -1,4 +1,4 @@
-const SERVER = "https://char-occurrence-wells-termination.trycloudflare.com"
+const SERVER = ""
 
 function showScreen(id){
     const screens = document.querySelectorAll(".screen");

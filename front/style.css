@@ -295,3 +295,8 @@ span{
     border-bottom-width: 3px;
     transform: translateY(3px);
 }
+
+#error{
+    font-size:20px;
+    color:red;
+}
