@@ -50,9 +50,10 @@ def create_quiz(image: UploadFile = File(...)):
 
     # 写真を開いて photos フォルダに保存する（名前は日時にして重ならないようにする）
     img = Image.open(image.file).convert("RGB")
+    img.thumbnail((800, 800))   # ← 追加：長い辺が800ピクセルになるよう縮める
     filename = datetime.now().strftime("%Y%m%d_%H%M%S") + f"_{quiz_id}.jpg"
-    img.save(f"photos/{filename}")
-
+    img.save(f"photos/{filename}", quality=80)   # ← quality=80 を追加
+    
     # CLIP で上位4つを出し、1位を正解にする
     top = judge.top4(img)
     choices = [word for word, score in top]

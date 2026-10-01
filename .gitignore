@@ -6,3 +6,4 @@ photos/
 .vscode/
 .venv/
 records.csv
+cloudflared.exe
