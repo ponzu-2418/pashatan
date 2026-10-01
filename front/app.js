@@ -101,7 +101,8 @@ async function loadWords(){
         const words = await res.json();
 
         const list = document.getElementById("record-list");
-        
+        list.innerHTML = "";
+
         words.forEach((w) => {
             const img = document.createElement("img");
             img.className = "word-photo";
