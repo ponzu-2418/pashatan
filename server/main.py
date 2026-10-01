@@ -99,20 +99,46 @@ def check_answer(data: Answer):
 # ③ 記録を見る
 @app.get("/stats")
 def get_stats():
+    records = load_records()
+    today = datetime.now().strftime("%Y-%m-%d")
+
+    # 正答率（まだ回答がなければ 0）
+    if records:
+        accuracy = sum(int(r["correct"]) for r in records) / len(records)
+    else:
+        accuracy = 0
+
+    # 今日の回答だけを集める
+    today_list = []
+    for r in records:
+        if r["datetime"].startswith(today):
+            today_list.append({
+                "word": r["word"],
+                "japanese": WORDS[r["word"]]["japanese"],
+                "correct": r["correct"] == "1",
+                "time": r["datetime"][11:16],
+                "image_url": r["image_url"],
+            })
+
     return {
-        "streak": 3,
-        "accuracy": 0.76,
-        "today": [
-            {"word": "cup", "japanese": "カップ", "correct": True, "time": "14:05", "image_url": "/photos/sample.jpg"},
-            {"word": "stapler", "japanese": "ホッチキス", "correct": False, "time": "14:07", "image_url": "/photos/sample.jpg"},
-        ],
+        "streak": calc_streak(records),
+        "accuracy": round(accuracy, 2),
+        "today": today_list,
     }
 
 
 # ④ 単語帳
 @app.get("/words")
 def get_words():
-    return [
-        {"word": "cup", "japanese": "カップ", "image_url": "/photos/sample.jpg", "seen": 3, "correct": 2},
-        {"word": "stapler", "japanese": "ホッチキス", "image_url": "/photos/sample.jpg", "seen": 1, "correct": 0},
-    ]
+    book = {}   # 単語 → その単語の集計
+    for r in load_records():
+        w = r["word"]
+        if w not in book:
+            book[w] = {"word": w, "japanese": WORDS[w]["japanese"], "seen": 0, "correct": 0}
+        book[w]["seen"] += 1
+        book[w]["correct"] += int(r["correct"])
+        book[w]["image_url"] = r["image_url"]   # 後の記録で上書きされるので、最新の写真が残る
+        book[w]["last_seen"] = r["datetime"]
+
+    # 最後に出た日が新しい順に並べる
+    return sorted(book.values(), key=lambda b: b["last_seen"], reverse=True)

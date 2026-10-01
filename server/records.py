@@ -25,11 +25,12 @@ def save_record(word, correct, image_url):
         writer.writerow([now, word, int(correct), image_url])
 
 
-# ③ 今日から1日ずつさかのぼって、回答した日が何日続いているか数える
 def calc_streak(records):
     days = {r["datetime"][:10] for r in records}
     streak = 0
     day = date.today()
+    if day.isoformat() not in days:
+        day -= timedelta(days=1)   # 今日まだ答えていなくても、昨日までの連続は途切れていない
     while day.isoformat() in days:
         streak += 1
         day -= timedelta(days=1)
