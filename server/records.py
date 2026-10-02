@@ -35,3 +35,10 @@ def calc_streak(records):
         streak += 1
         day -= timedelta(days=1)
     return streak
+
+# 復習が必要な記録（単語ごとに、最後の回答が不正解のもの）を集める
+def review_list(records):
+    last = {}
+    for r in records:
+        last[r["word"]] = r   # 後の記録で上書き → 単語ごとの「最後の回答」が残る
+    return [r for r in last.values() if r["correct"] == "0"]

@@ -8,7 +8,7 @@ import random
 from datetime import datetime
 from PIL import Image
 from clip_model import load_words, ClipJudge
-from records import load_records, save_record, calc_streak
+from records import load_records, save_record, calc_streak, review_list
 
 app = FastAPI()
 
@@ -32,7 +32,7 @@ next_id = 1
 MIN_SCORE = 0.3   # 1位の確率がこれより低ければ「認識できない」とする
 
 # 写真の真ん中だけを切り出す（背景に引っ張られにくくする）
-def center_crop(img, ratio=0.7):
+def center_crop(img, ratio=0.8):
     w, h = img.size
     cw, ch = int(w * ratio), int(h * ratio)
     left, top = (w - cw) // 2, (h - ch) // 2
@@ -156,6 +156,47 @@ def get_words():
 
     # 最後に出た日が新しい順に並べる
     return sorted(book.values(), key=lambda b: b["last_seen"], reverse=True)
+
+# ⑤ 復習：間違えた単語を、前に撮った写真でもう一度出題する
+@app.get("/review")
+def get_review():
+    global next_id
+
+    # 復習が必要な単語を集める（単語リストから消した単語は除く）
+    targets = [r for r in review_list(load_records()) if r["word"] in WORDS]
+    if not targets:
+        return {"quiz_id": None, "remaining": 0}
+
+    r = random.choice(targets)
+    answer = r["word"]
+
+    # 保存してある写真をもう一度 CLIP にかけて、似た単語を集める
+    try:
+        img = Image.open(r["image_url"].lstrip("/")).convert("RGB")
+        similar = [w for w, s in judge.top4(center_crop(img))]
+    except FileNotFoundError:
+        similar = []   # 写真が消えていたら、似た単語なしで進める
+
+    # 正解以外の3つを選ぶ（足りなければランダムで補う）
+    others = [w for w in similar if w != answer]
+    while len(others) < 3:
+        w = random.choice(list(WORDS))
+        if w != answer and w not in others:
+            others.append(w)
+
+    choices = [answer] + others[:3]
+    random.shuffle(choices)
+
+    quiz_id = next_id
+    next_id += 1
+    QUIZZES[quiz_id] = {"answer": answer, "image_url": r["image_url"]}
+
+    return {
+        "quiz_id": quiz_id,
+        "choices": choices,
+        "image_url": r["image_url"],
+        "remaining": len(targets),
+    }
 
 # 相方の画面（front フォルダ）を /app で見られるようにする
 app.mount("/app", StaticFiles(directory="../front", html=True), name="front")
