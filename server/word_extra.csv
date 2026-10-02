@@ -1,0 +1,168 @@
+word,category,related
+cup,食器・台所,saucer（受け皿）／pour（注ぐ）
+mug,食器・台所,handle（取っ手）／beverage（飲み物）
+bottle,食器・台所,lid（ふた）／container（容器）
+glass,食器・台所,fragile（割れやすい）／fill（満たす）
+plate,食器・台所,dish（皿・料理）／serve（料理を出す）
+bowl,食器・台所,soup（スープ）／stir（かき混ぜる）
+fork,食器・台所,utensil（食器類）／cutlery（ナイフやフォーク類）
+spoon,食器・台所,utensil（食器類）／stir（かき混ぜる）
+knife,食器・台所,blade（刃）／slice（薄く切る）
+chopsticks,食器・台所,utensil（食器類）／a pair of（一組の）
+kettle,食器・台所,boil（沸かす）／steam（蒸気）
+microwave,家電,heat up（温める）／appliance（家電製品）
+refrigerator,家電,appliance（家電製品）／freezer（冷凍庫）
+toaster,家電,appliance（家電製品）／plug in（電源につなぐ）
+coffee maker,家電,brew（コーヒーをいれる）／break room（休憩室）
+banana,食べ物,peel（皮をむく）／bunch（房）
+apple,食べ物,produce（農産物）／orchard（果樹園）
+orange,食べ物,juice（果汁）／squeeze（しぼる）
+sandwich,食べ物,catering（仕出し）／refreshments（軽食）
+pen,文房具,ink（インク）／signature（署名）
+pencil,文房具,sharpen（削る）／lead（芯）
+eraser,文房具,erase（消す）／correction（訂正）
+ruler,文房具,measure（測る）／length（長さ）
+marker,文房具,underline（下線を引く）／label（ラベルを貼る）
+highlighter,文房具,highlight（目立たせる）／emphasize（強調する）
+notebook,文房具,take notes（メモを取る）／page（ページ）
+notepad,文房具,memo（メモ）／jot down（書き留める）
+sticky note,文房具,reminder（忘れないためのメモ）／attach（貼り付ける）
+book,読み物,publication（出版物）／author（著者）
+magazine,読み物,subscription（定期購読）／issue（号）
+newspaper,読み物,article（記事）／headline（見出し）
+envelope,オフィス,enclose（同封する）／postage（郵便料金）
+folder,オフィス,file（ファイルする）／organize（整理する）
+binder,オフィス,document（書類）／material（資料）
+clipboard,オフィス,checklist（確認リスト）／inspection（点検）
+paper clip,オフィス,fasten（留める）／attach（添付する）
+stapler,オフィス,staple（ホッチキスでとじる）／office supplies（事務用品）
+scissors,文房具,cut（切る）／trim（切りそろえる）
+tape,文房具,seal（封をする）／adhesive（粘着性の）
+calculator,オフィス,calculate（計算する）／estimate（見積もり）
+calendar,オフィス,schedule（予定）／appointment（予約）
+receipt,オフィス,reimbursement（払い戻し）／invoice（請求書）
+business card,オフィス,exchange（交換する）／contact information（連絡先）
+document,オフィス,submit（提出する）／confidential（機密の）
+whiteboard,オフィス,presentation（発表）／erase（消す）
+laptop,電子機器,device（機器）／portable（持ち運べる）
+monitor,電子機器,screen（画面）／display（表示する）
+keyboard,電子機器,type（入力する）／enter（入力する）
+mouse,電子機器,click（クリックする）／cursor（カーソル）
+printer,電子機器,toner（トナー）／paper jam（紙詰まり）
+projector,電子機器,screen（スクリーン）／slide（スライド）
+smartphone,電子機器,mobile device（携帯機器）／application（アプリ）
+tablet,電子機器,touch screen（タッチ画面）／device（機器）
+charger,電子機器,charge（充電する）／outlet（コンセント）
+cable,電子機器,connect（接続する）／cord（コード）
+headphones,電子機器,volume（音量）／audio（音声）
+earphones,電子機器,wireless（無線の）／audio（音声）
+speaker,電子機器,volume（音量）／keynote speaker（基調講演者）
+camera,電子機器,photograph（写真）／lens（レンズ）
+remote control,電子機器,operate（操作する）／switch（切り替える）
+battery,電子機器,replace（交換する）／run out（切れる）
+light bulb,日用品,replace（交換する）／fixture（照明器具）
+lamp,家具・部屋,lighting（照明）／switch on（つける）
+fan,家電,ventilation（換気）／air conditioner（エアコン）
+clock,家具・部屋,on time（時間どおりに）／deadline（締め切り）
+watch,持ち物,wrist（手首）／accessory（装飾品）
+glasses,持ち物,lens（レンズ）／eyesight（視力）
+wallet,持ち物,cash（現金）／lost and found（遺失物取扱所）
+key,持ち物,lock（鍵をかける）／unlock（鍵を開ける）
+umbrella,持ち物,forecast（予報）／shelter（雨宿りの場所）
+backpack,持ち物,carry（運ぶ）／luggage（荷物）
+handbag,持ち物,belongings（持ち物）／purse（ハンドバッグ）
+suitcase,持ち物,baggage claim（手荷物受取所）／pack（荷造りする）
+hat,衣類,brim（つば）／wear（身につけている）
+shoe,衣類,footwear（履物）／a pair of（一組の）
+jacket,衣類,attire（服装）／dress code（服装規定）
+tie,衣類,formal（正式な）／attire（服装）
+towel,日用品,dry（乾かす）／wipe（ふく）
+tissue,日用品,wipe（ふく）／disposable（使い捨ての）
+toothbrush,日用品,brush（みがく）／amenity（備え付けの品）
+mirror,家具・部屋,reflect（映す）／reflection（映った姿）
+chair,家具・部屋,be seated（座っている）／arrange（並べる）
+desk,家具・部屋,workstation（作業スペース）／drawer（引き出し）
+table,家具・部屋,set the table（食卓の準備をする）／reserve（予約する）
+sofa,家具・部屋,furniture（家具）／lounge（休憩室）
+bed,家具・部屋,accommodation（宿泊施設）／linen（シーツ類）
+shelf,家具・部屋,stock（在庫を置く）／display（陳列する）
+drawer,家具・部屋,storage（収納）／pull out（引き出す）
+cabinet,家具・部屋,storage（収納）／file（ファイルする）
+door,家具・部屋,entrance（入口）／exit（出口）
+window,家具・部屋,view（眺め）／pane（窓ガラス）
+curtain,家具・部屋,blind（ブラインド）／draw（引く）
+plant,家具・部屋,water（水をやる）／facility（施設）
+vase,家具・部屋,bouquet（花束）／arrange（生ける）
+trash can,日用品,dispose of（処分する）／recycle（再利用する）
+box,日用品,package（小包）／carton（段ボール箱）
+bag,持ち物,carry（運ぶ）／plastic bag（ビニール袋）
+bicycle,屋外・乗り物,commute（通勤する）／ride（乗る）
+car,屋外・乗り物,vehicle（乗り物）／parking lot（駐車場）
+bus,屋外・乗り物,fare（運賃）／public transportation（公共交通機関）
+sign,屋外・乗り物,notice（掲示）／direction（方向）
+ticket,持ち物,admission（入場）／fare（運賃）
+frying pan,食器・台所,cookware（調理器具）／stove（コンロ）
+pot,食器・台所,simmer（煮込む）／lid（ふた）
+cutting board,食器・台所,chop（刻む）／ingredient（材料）
+tray,食器・台所,carry（運ぶ）／cafeteria（食堂）
+napkin,食器・台所,fold（折る）／wipe（ふく）
+sponge,日用品,absorb（吸収する）／scrub（こする）
+teapot,食器・台所,pour（注ぐ）／spout（注ぎ口）
+lunch box,食器・台所,packed lunch（弁当）／container（容器）
+rice cooker,家電,appliance（家電製品）／steam（蒸気）
+egg,食べ物,dozen（1ダース）／dairy（乳製品）
+bread,食べ物,bakery（パン屋）／loaf（一斤）
+pizza,食べ物,delivery（配達）／slice（一切れ）
+cake,食べ物,dessert（デザート）／celebrate（祝う）
+donut,食べ物,pastry（焼き菓子）／dozen（1ダース）
+tomato,食べ物,vegetable（野菜）／ripe（熟した）
+carrot,食べ物,vegetable（野菜）／peel（皮をむく）
+onion,食べ物,chop（刻む）／ingredient（材料）
+potato,食べ物,mash（つぶす）／side dish（付け合わせ）
+lemon,食べ物,sour（酸っぱい）／squeeze（しぼる）
+strawberry,食べ物,seasonal（季節の）／fresh（新鮮な）
+grapes,食べ物,vineyard（ぶどう園）／bunch（房）
+candle,日用品,light（火をつける）／flame（炎）
+pillow,家具・部屋,bedding（寝具）／cushion（クッション）
+blanket,家具・部屋,bedding（寝具）／fold（たたむ）
+cushion,家具・部屋,comfortable（快適な）／furniture（家具）
+hanger,日用品,hang（掛ける）／closet（クローゼット）
+rug,家具・部屋,carpet（じゅうたん）／floor（床）
+toilet paper,日用品,restroom（お手洗い）／supplies（備品）
+soap,日用品,rinse（すすぐ）／hygiene（衛生）
+shampoo,日用品,rinse（すすぐ）／toiletries（洗面用品）
+toothpaste,日用品,tube（チューブ）／toiletries（洗面用品）
+hair dryer,家電,blow-dry（ドライヤーで乾かす）／amenity（備え付けの品）
+comb,日用品,brush（ブラシ）／groom（身だしなみを整える）
+socks,衣類,a pair of（一組の）／garment（衣類）
+gloves,衣類,protective（保護用の）／a pair of（一組の）
+scarf,衣類,wrap（巻く）／accessory（装飾品）
+sweater,衣類,knit（編む）／garment（衣類）
+shirt,衣類,collar（えり）／iron（アイロンをかける）
+belt,衣類,fasten（締める）／buckle（留め金）
+sunglasses,持ち物,glare（まぶしい光）／protect（守る）
+ring,持ち物,jewelry（宝石類）／engagement（婚約）
+necklace,持ち物,jewelry（宝石類）／chain（鎖）
+mask,日用品,cover（おおう）／protective（保護用の）
+helmet,持ち物,safety gear（安全装備）／construction site（工事現場）
+ball,その他,bounce（はずむ）／throw（投げる）
+coin,持ち物,change（おつり）／currency（通貨）
+credit card,持ち物,payment（支払い）／expire（期限が切れる）
+passport,持ち物,identification（身分証明）／customs（税関）
+map,持ち物,directions（道順）／location（場所）
+poster,家具・部屋,post（掲示する）／advertise（宣伝する）
+picture frame,家具・部屋,hang（掛ける）／portrait（肖像）
+flower,その他,bloom（咲く）／florist（花屋）
+stamp,オフィス,postage（郵便料金）／approve（承認する）
+USB flash drive,電子機器,storage（保存）／back up（バックアップを取る）
+router,電子機器,network（ネットワーク）／connection（接続）
+power strip,電子機器,outlet（コンセント）／plug in（電源につなぐ）
+bench,屋外・乗り物,be seated（座っている）／park（公園）
+vending machine,屋外・乗り物,beverage（飲み物）／out of order（故障中）
+traffic light,屋外・乗り物,intersection（交差点）／pedestrian（歩行者）
+stairs,屋外・乗り物,staircase（階段）／railing（手すり）
+elevator,屋外・乗り物,floor（階）／out of service（運転休止中）
+train,屋外・乗り物,platform（ホーム）／departure（出発）
+truck,屋外・乗り物,load（荷物を積む）／shipment（発送品）
+dog,その他,leash（リード）／pet（ペット）
+cat,その他,pet（ペット）／veterinarian（獣医）

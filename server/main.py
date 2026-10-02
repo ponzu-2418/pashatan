@@ -9,7 +9,7 @@ from datetime import datetime
 from PIL import Image, ImageOps
 from clip_model import load_words, ClipJudge
 from records import load_records, save_record, calc_streak, review_list
-
+import csv
 
 app = FastAPI()
 
@@ -27,6 +27,16 @@ app.mount("/photos", StaticFiles(directory="photos"), name="photos")
 
 # サーバー起動時に1回だけ準備する
 WORDS = load_words()
+# 単語ごとのカテゴリと関連語を読み込む
+def load_extra(path="word_extra.csv"):
+    extra = {}
+    with open(path, encoding="utf-8-sig") as f:
+        for row in csv.DictReader(f):
+            extra[row["word"]] = row
+    return extra
+
+EXTRA = load_extra()
+
 judge = ClipJudge(WORDS)
 QUIZZES = {}   # quiz_id → 正解と写真の場所を覚えておく辞書
 next_id = 1
@@ -93,6 +103,7 @@ def check_answer(data: Answer):
 
     answer = quiz["answer"]
     info = WORDS[answer]
+    extra = EXTRA.get(answer, {})
     correct = data.choice == answer
 
     # 今日の1問目かどうか（エフェクト用）を、記録する前に調べておく
@@ -108,6 +119,8 @@ def check_answer(data: Answer):
         "answer": answer,
         "japanese": info["japanese"],
         "explanation": info["explanation"],
+        "category": extra.get("category", ""),
+        "related": extra.get("related", ""),
         "streak": streak,
         "streak_up": first_today,
     }
@@ -157,6 +170,8 @@ def get_words():
                 "word": w,
                 "japanese": WORDS[w]["japanese"],
                 "explanation": WORDS[w]["explanation"],
+                "category": EXTRA.get(w, {}).get("category", ""),
+                "related": EXTRA.get(w, {}).get("related", ""),
                 "seen": 0,
                 "correct": 0,
             }
