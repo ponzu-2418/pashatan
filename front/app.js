@@ -39,7 +39,7 @@ async function createQuiz(file){
     showQuestion(quiz);
     }catch(error){
         console.error(error);
-        showError("うまくいきませんでした。もう一度撮ってね。");
+        showError("うまくいきませんでした。^nもう一度撮ってね。");
     }
 }
 
@@ -107,7 +107,7 @@ async function sendAnswer(choice){
         showResult(result);
     } catch (error) {
         console.error(error);
-        showError("答え合わせに失敗しました。もう一度撮ってね。");
+        showError("答え合わせに失敗しました。\nもう一度撮ってね。");
     }
 }
 
@@ -151,7 +151,7 @@ async function loadWords(){
             throw new Error("サーバーに断られました");
         }
         const words = await res.json();
-        document.getElementById("word-count").textContent = words.length + "つの単語を集めたよ";
+        document.getElementById("word-count").textContent = words.length + "個の単語を集めたよ";
 
         const list = document.getElementById("record-list");
         list.innerHTML = "";

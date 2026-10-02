@@ -373,4 +373,5 @@ span{
 #error{
     font-size:20px;
     color:red;
+    white-space: pre-line;
 }
