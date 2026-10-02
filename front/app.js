@@ -83,8 +83,8 @@ async function loadStats(){
             throw new Error("サーバーに断られました");
         }
         const stats=await res.json();
-        document.getElementById("record-day").textContent = stats.streak + "日";
-        document.getElementById("answer-rate").textContent = Math.round(stats.accuracy * 100)+"%";
+        document.getElementById("record-day").textContent = "連続" + stats.streak + "日";
+        document.getElementById("answer-rate").textContent = "正答率" + Math.round(stats.accuracy * 100)+"%";
         
     }catch(error){
         console.error(error);
@@ -99,6 +99,7 @@ async function loadWords(){
             throw new Error("サーバーに断られました");
         }
         const words = await res.json();
+        document.getElementById("word-count").textContent = words.length + "つの単語を集めたよ";
 
         const list = document.getElementById("record-list");
         list.innerHTML = "";
@@ -132,6 +133,7 @@ async function loadWords(){
         showError("単語帳を読み込めませんでした。");
     }
 }
+
 console.log("パシャ単を起動しました");
 const recordButton = document.getElementById("record");
 const errorText = document.getElementById("error");

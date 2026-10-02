@@ -71,27 +71,29 @@
 
         <section id="screen-record" class="screen">
             <div class="top">
-                <h1 id="kiroku">記録</h1>
-                <div class="record-card">
-                    <div class="day">
-                        <p class="stat-label">連続日数</p>
-                        <p id="record-day"></p>
-                    </div>
-                    <div class ="rate">
-                        <p class="stat-label">正解率</p>            
-                        <p id="answer-rate"></p>
+                <div class ="record-header">
+                    <h1 id="kiroku">記録</h1>
+                    <div class="badges">
+                        <p id="record-day" class="badge"></p>
+                        <p id="answer-rate" class="badge"></p>
                     </div>
                 </div>
+
+                <div class="quiz-title">
+                    <svg class = "mascot-small" width="72" height="60" viewBox="0 0 120 100" aria-hidden="true"><rect x="38" y="8" width="30" height="16" rx="6" fill="#3b3531"/><rect x="8" y="18" width="104" height="74" rx="22" fill="#ef5a2c" stroke="#3b3531" stroke-width="5"/><rect x="88" y="28" width="12" height="8" rx="3" fill="#ffd66b" stroke="#3b3531" stroke-width="4"/><circle cx="60" cy="58" r="24" fill="#fffaf3" stroke="#3b3531" stroke-width="5"/><circle cx="51" cy="54" r="4.5" fill="#3b3531"/><circle cx="69" cy="54" r="4.5" fill="#3b3531"/><circle cx="45" cy="63" r="3.5" fill="#ffb3a0"/><circle cx="75" cy="63" r="3.5" fill="#ffb3a0"/><path d="M53 64 q7 7 14 0" stroke="#3b3531" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+                    <p id="word-count" class="quiz-question"></p>
+                </div>
+
+                <ul id="record-list">
+                    <li class="word-item">
+                        <img class="word-photo" src="" alt="">
+                        <div class="word-text">
+                            <p class="word-en"></p>
+                            <p class="word-ja"></p>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <ul id="record-list" class="top">
-                <li class="word-item">
-                    <img class="word-photo" src="" alt="">
-                    <div class="word-text">
-                        <p class="word-en"></p>
-                        <p class="word-ja"></p>
-                    </div>
-                </li>
-            </ul>
             <button class="title sub-button bottom">タイトルへ</button>
         </section>
     <script src="app.js"></script>

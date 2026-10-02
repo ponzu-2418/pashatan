@@ -165,88 +165,7 @@ span{
     margin:4px;
 }
 
-.record-card{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap:12px;
-    width:190%;
-    max-width:340px;
-}
 
-.day,.rate{
-    padding:14px;
-    color:white;
-    background:rgb(255, 119, 0);
-    border:2px solid rgb(255, 119, 0);
-    border-bottom-width:6px;
-    border-bottom-color:  rgb(179, 85, 2);
-    border-radius:18px;
-}
-
-.stat-label{
-    font-size:14px;
-    margin:0;
-}
-
-#record-day,#answer-rate{
-    font-size: 30px;
-    font-weight: bold;
-    margin: 0;
-}
-
-#record-list{
-    list-style:none;
-    padding:0;
-    margin:0;
-    display:flex;
-    flex-direction: column;
-    gap:12px;
-    width:100%;
-    max-width: 340px;
-    max-height:360px;
-    overflow-y:auto;
-}
-.word-item{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:10px;
-    background:white;
-    border:4px solid rgb(255, 119, 0);
-    border-radius:18px;
-    width:100%;
-    max-width:340px;
-}
-
-.word-photo{
-    width:60px;
-    height:60px;
-    object-fit:contain;
-    border-radius:10px;
-    flex-shrink:0;
-    background:gray;
-}
-
-.word-text{
-    display:flex;
-    flex-direction: column;
-    gap:2px;
-}
-
-.word-en{
-    font-size: 20px;
-    font-weight: bold;
-    margin:0;
-}
-
-.word-ja{
-    font-size:14px;
-    margin:0;
-}
-
-#kiroku{
-    margin:6px;
-}
 #screen-title,#screen-result,#screen-record{
     justify-content: space-between;
 }
@@ -298,6 +217,83 @@ span{
 .sub-button:active{
     border-bottom-width: 3px;
     transform: translateY(3px);
+}
+
+.record-header{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    width: 100%;
+}
+
+#kiroku{
+    margin: 0;
+    font-family: "Mochiy Pop One" , sans-serif;
+    font-weight: normal;
+    font-size: 30px;
+}
+
+.badges{
+    display: flex;
+    gap:8px;
+}
+
+.badge{
+    margin:0;
+    padding: 6px 12px;
+    border: 3px solid rgba(201, 201, 201, 0.719);
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+#record-day{
+    background:  #ffe3cf;
+}
+
+#answer-rate{
+    background: #fff1c7; 
+}
+
+#record-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:12px;
+    width:100%;
+}
+
+.word-item{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    padding: 8px 8px 12px;
+    background: white;
+    border: 3px solid rgba(201,201,201,0.719);
+    border-radius: 18px;
+    text-align: center;
+}
+
+.word-photo{
+    width: 100%;
+    height: 110px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #efe6da;
+}
+
+.word-en{
+    margin: 0;
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.word-ja{
+    margin:0;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 #error{
