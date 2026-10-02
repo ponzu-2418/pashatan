@@ -5,6 +5,10 @@ from transformers import CLIPModel, CLIPProcessor
 
 MODEL_NAME = "openai/clip-vit-base-patch16"
 
+# CLIP に伝えるときだけ使う、詳しい言い方
+PROMPT_NAMES = {
+
+}
 
 # ① words.csv を読み込んで辞書にする
 def load_words(path="words.csv"):
@@ -25,7 +29,7 @@ class ClipJudge:
         self.model = CLIPModel.from_pretrained(MODEL_NAME)
         self.processor = CLIPProcessor.from_pretrained(MODEL_NAME)
         self.words = list(words)
-        self.texts = [f"a photo of {w}, a type of object" for w in self.words]
+        self.texts = [f"a photo of a {PROMPT_NAMES.get(w, w)}" for w in self.words]
         print("読み込み完了")
 
     # ③ 写真を受け取って、上位4つの (単語, 確率) を返す
