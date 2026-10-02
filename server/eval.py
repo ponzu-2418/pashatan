@@ -40,6 +40,9 @@ for filename in sorted(os.listdir(TEST_DIR)):
     plain = best_word(s_plain)
     crop = best_word(s_crop)
     avg = best_word(s_avg)
+    new = judge.top4(center_crop(img))[0][0]     # 高速化した top4 の1位
+    if new != crop:
+        print("    ★ 結果が変わった:", crop, "→", new)
 
     total += 1
     if plain == answer:
