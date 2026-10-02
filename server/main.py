@@ -6,9 +6,10 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import random
 from datetime import datetime
-from PIL import Image
+from PIL import Image, ImageOps
 from clip_model import load_words, ClipJudge
 from records import load_records, save_record, calc_streak, review_list
+
 
 app = FastAPI()
 
@@ -54,12 +55,14 @@ def hello():
 def create_quiz(image: UploadFile = File(...)):
     global next_id
 
-    # 写真を開いて、CLIP で上位4つを出す
-    img = Image.open(image.file).convert("RGB")
+    # 写真を開いて、スマホの向きの情報どおりに回転させる
+    img = Image.open(image.file)
+    img = ImageOps.exif_transpose(img)
+    img = img.convert("RGB")
     img.thumbnail((800, 800))
     top = judge.top4(center_crop(img))
-    print("判定結果:", [(w, round(s, 2)) for w, s in top], flush=True)   # 調整用に表示
-
+    print("判定結果:", [(w, round(s, 2)) for w, s in top], flush=True)
+    
     # 1位の確率が低すぎたら、問題を作らずにエラーを返す
     if top[0][1] < MIN_SCORE:
         raise HTTPException(
