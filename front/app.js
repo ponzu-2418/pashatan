@@ -39,7 +39,7 @@ async function createQuiz(file){
     showQuestion(quiz);
     }catch(error){
         console.error(error);
-        showError("うまくいきませんでした。^nもう一度撮ってね。");
+        showError("うまくいきませんでした。\nもう一度撮ってね。");
     }
 }
 
