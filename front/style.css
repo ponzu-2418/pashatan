@@ -135,7 +135,7 @@ span{
     flex-shrink: 0;
 }
 
-#photo{
+#photo,#detail-photo{
     font-size: 34px;
 }
 
@@ -153,7 +153,7 @@ span{
     font-size:16px;
 }
 
-#word,#japanese,#sub-title{
+#word,#japanese,#sub-title,#detail-en,#detail-ja{
     margin:0;
 }
 
@@ -161,12 +161,12 @@ span{
     margin-bottom:90px;
 }
 
-#explan{
+#explan,#detail-explan{
     margin:4px;
 }
 
 
-#screen-title,#screen-result,#screen-record{
+#screen-title,#screen-result,#screen-record,#screen-word{
     justify-content: space-between;
 }
 .top,.bottom{

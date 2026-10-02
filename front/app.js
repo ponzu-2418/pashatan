@@ -105,6 +105,16 @@ async function loadWords(){
         list.innerHTML = "";
 
         words.forEach((w) => {
+
+            const mark = document.createElement("span");
+            if(w.last_correct){
+            mark.className = "mark ok";
+            mark.textContent = "〇";
+            }else{
+                mark.clssName = "mark ng";
+                mark.textContent = "×";
+            
+            }
             const img = document.createElement("img");
             img.className = "word-photo";
             img.src = SERVER + w.image_url;
@@ -125,7 +135,9 @@ async function loadWords(){
             const li = document.createElement("li");
             li.className = "word-item";
             li.append(img,text);
-
+            li.addEventListener("click", () => {
+                showWordDetail(w);
+            });
             list.append(li);
         });
     }catch(error){
@@ -134,6 +146,13 @@ async function loadWords(){
     }
 }
 
+function showWordDetail(w){
+    document.getElementById("detail-photo").src = SERVER + w.image_url;
+    document.getElementById("detail-en").textContent = w.word;
+    document.getElementById("detail-ja").textContent = w.japanese;
+    document.getElementById("detail-explan").textContent = w.explanation || "解説はあだありません";
+    showScreen("screen-word");
+}
 console.log("パシャ単を起動しました");
 const recordButton = document.getElementById("record");
 const errorText = document.getElementById("error");
@@ -186,3 +205,9 @@ document.addEventListener("touchend", (event) => {
     }
     lastTouchEnd = now;
 }, { passive: false });
+
+const backRecordButton = document.getElementById("back-record");
+
+backRecordButton.addEventListener("click" , () => {
+    showScreen("screen-word");
+});
