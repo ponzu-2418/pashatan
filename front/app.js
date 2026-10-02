@@ -135,7 +135,19 @@ async function loadWords(){
         const list = document.getElementById("record-list");
         list.innerHTML = "";
 
+        words.sort((a,b) => (a.category || "その他").localeCompare(b.category || "その他"));
+
+        let lastCategory = null;
+
         words.forEach((w) => {
+            const category = w.category || "その他";
+            if(category !== lastCategory){
+                const heading = document.createElement("li");
+                heading.className = "category-heading";
+                heading.textContent = category;
+                list.append(heading);
+                lastCategory = category;
+            }
 
             const mark = document.createElement("span");
             if(w.last_correct){

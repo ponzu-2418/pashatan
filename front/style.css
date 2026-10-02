@@ -340,6 +340,17 @@ span{
     font-size: 15px;
 }
 
+.category-heading{
+    grid-column: 1 / -1;
+    margin-top: 8px;
+    padding: 4px 4px 6px;
+    border-bottom: 3px dotted rgba(201, 201, 201, 0.719);
+    color: rgb(255, 119, 0);
+    font-size: 15px;
+    font-weight: 900;
+    text-align: left;
+
+}
 #error{
     font-size:20px;
     color:red;
