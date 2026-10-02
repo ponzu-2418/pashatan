@@ -20,6 +20,7 @@ function showQuestion(quiz){
 }
 
 let quizId = null;
+let isReview = false;
 
 async function createQuiz(file){
     try{
@@ -41,6 +42,32 @@ async function createQuiz(file){
     }
 }
 
+async function startReview(){
+    isReview = true;
+    try{
+        const res = await fetch(SERVER + "/review");
+        if(!res.ok){
+            throw new Error("サーバーに断られました");
+        }
+        const quiz = await res.json();
+
+        if (quiz.quiz_id == null){
+            isReview = false;
+            showScreen("screen-record");
+            loadStats();
+            await loadWords();
+            document.getElementById("word-count").textContent="復習完了!　よく頑張ったね";
+            return;
+        }
+
+        quizId = quiz.quiz_id;
+        photo.src = SERVER + quiz.image_url;
+        showQuestion(quiz);
+    }catch(error){
+        console.error(error);
+        showError("復習の問題を作れませんでした。");
+    }
+}
 function showResult(result){
     if(result.correct){
         document.getElementById("correct").textContent = "正解！";
@@ -50,6 +77,8 @@ function showResult(result){
     document.getElementById("word").textContent = result.answer;
     document.getElementById("japanese").textContent = result.japanese;
     document.getElementById("explan").textContent = result.explanation;
+    document.getElementById("next-review").hidden = !isReview;
+    document.getElementById("retake").hidden = isReview;
     showScreen("screen-result");
 }
 
@@ -178,6 +207,7 @@ const photo = document.getElementById("photo");
 
 photoInput.addEventListener("change", () => {
     const file = photoInput.files[0];
+    isReview = false;
     photoInput.value = "";
     errorText.textContent="";
     photo.src = URL.createObjectURL(file);
@@ -211,3 +241,13 @@ const backRecordButton = document.getElementById("back-record");
 backRecordButton.addEventListener("click" , () => {
     showScreen("screen-record");
 });
+
+document.getElementById("review").addEventListener("click", () => {
+    showScreen("screen-judge");
+    startReview();
+});
+
+document.getElementById("next-review").addEventListener("click", ()=> {
+    showScreen("screen-judge");
+    startReview();
+})
