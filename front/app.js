@@ -107,6 +107,12 @@ function showError(message){
     errorText.textContent = message;
 }
 
+function speak(word) {
+    const voice = new SpeechSynthesisUtterance(word);
+    voice.lang = "en-Us";
+    speechSynthesis.speak(voice);
+}
+
 async function loadStats(){
     try{
         const res = await fetch(SERVER + "/stats");
@@ -267,3 +273,11 @@ document.getElementById("next-review").addEventListener("click", ()=> {
     showScreen("screen-judge");
     startReview();
 })
+
+document.getElementById("speak-result").addEventListener("click", () =>{
+    speak(document.getElementById("word-en").textContent);
+});
+
+document.getElementById("speak-detail").addEventListener("click", () =>{
+    speak(document.getElementById("detail-en").textContent);
+});

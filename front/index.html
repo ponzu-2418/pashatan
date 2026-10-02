@@ -44,10 +44,10 @@
                 <h1 class="quiz-question">これを英語で言うと?</h1>
             </div>
             <div class="quiz-box">
-                <button id="quiz1" class="quiz">cup</button>
-                <button id="quiz2" class="quiz">apple</button>
-                <button id="quiz3" class="quiz">button</button>
-                <button id="quiz4" class="quiz">transformation</button>
+                <button id="quiz1" class="quiz"></button>
+                <button id="quiz2" class="quiz"></button>
+                <button id="quiz3" class="quiz"></button>
+                <button id="quiz4" class="quiz"></button>
             </div>
         </section>
 
@@ -58,7 +58,11 @@
                     <h1 id="correct"></h1> 
                 </div>
                 <div class="word-card">
-                    <h1 id="word"></h1> 
+                    <h1 id="word"></h1>
+                    <button id="speak-result" class="speak-button">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/></svg>
+                    発音を聞く
+                    </button> 
                     <p id="japanese"></p>
                     <p id="explan"></p>
                     <div class="word-extra">
@@ -101,8 +105,10 @@
                     </li>
                 </ul>
             </div>
-            <button id ="review" class="main-button buttom">復習する</button>
-            <button class="title sub-button bottom">タイトルへ</button>
+            <div class="bottom">
+                <button id ="review" class="main-button">復習する</button>
+                <button class="title sub-button">タイトルへ</button>
+            </div>
         </section>
 
         <section id="screen-word" class="screen">
@@ -110,6 +116,10 @@
                 <img id="detail-photo" src="" alt="">
                 <div class="word-card">
                     <h1 id = "detail-en"></h1>
+                    <button id="speak-detail" class="speak-button">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/></svg>
+                    発音を聞く
+                    </button>   
                     <p id="detail-ja"></p>
                     <p id="detail-explan"></p>
                     <div class="word-extra">
