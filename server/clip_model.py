@@ -3,7 +3,7 @@ import csv
 from PIL import Image
 from transformers import CLIPModel, CLIPProcessor
 
-MODEL_NAME = "openai/clip-vit-base-patch32"
+MODEL_NAME = "openai/clip-vit-base-patch16"
 
 
 # ① words.csv を読み込んで辞書にする
@@ -25,7 +25,7 @@ class ClipJudge:
         self.model = CLIPModel.from_pretrained(MODEL_NAME)
         self.processor = CLIPProcessor.from_pretrained(MODEL_NAME)
         self.words = list(words)
-        self.texts = [f"a photo of a {w}" for w in self.words]
+        self.texts = [f"a photo of {w}, a type of object" for w in self.words]
         print("読み込み完了")
 
     # ③ 写真を受け取って、上位4つの (単語, 確率) を返す

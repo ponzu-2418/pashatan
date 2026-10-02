@@ -31,6 +31,13 @@ QUIZZES = {}   # quiz_id → 正解と写真の場所を覚えておく辞書
 next_id = 1
 MIN_SCORE = 0.3   # 1位の確率がこれより低ければ「認識できない」とする
 
+# 写真の真ん中だけを切り出す（背景に引っ張られにくくする）
+def center_crop(img, ratio=0.7):
+    w, h = img.size
+    cw, ch = int(w * ratio), int(h * ratio)
+    left, top = (w - cw) // 2, (h - ch) // 2
+    return img.crop((left, top, left + cw, top + ch))
+
 # /answer に送られてくるデータの形
 class Answer(BaseModel):
     quiz_id: int
@@ -50,7 +57,7 @@ def create_quiz(image: UploadFile = File(...)):
     # 写真を開いて、CLIP で上位4つを出す
     img = Image.open(image.file).convert("RGB")
     img.thumbnail((800, 800))
-    top = judge.top4(img)
+    top = judge.top4(center_crop(img))
     print("判定結果:", [(w, round(s, 2)) for w, s in top], flush=True)   # 調整用に表示
 
     # 1位の確率が低すぎたら、問題を作らずにエラーを返す
