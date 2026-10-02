@@ -209,5 +209,5 @@ document.addEventListener("touchend", (event) => {
 const backRecordButton = document.getElementById("back-record");
 
 backRecordButton.addEventListener("click" , () => {
-    showScreen("screen-word");
+    showScreen("screen-record");
 });

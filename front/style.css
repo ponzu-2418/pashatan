@@ -85,7 +85,7 @@ span{
     border-bottom: 10px solid transparent;
 }
 
-#photo{
+#photo,#detail-photo{
     margin-top:16px;
     margin-bottom:16px;
     width:100%;
@@ -133,10 +133,6 @@ span{
 
 .mascot-small{
     flex-shrink: 0;
-}
-
-#photo,#detail-photo{
-    font-size: 34px;
 }
 
 .word-card{
@@ -277,7 +273,27 @@ span{
     border: 3px solid rgba(201,201,201,0.719);
     border-radius: 18px;
     text-align: center;
+    position:relative;
 }
+
+.mark {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 3px solid white;
+    color: white;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.mark.ok { background: #6fae4f; }
+.mark.ng { background: #ef5a2c; }
 
 .word-photo{
     width: 100%;
