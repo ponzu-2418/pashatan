@@ -332,7 +332,7 @@ span{
     color: rgb(255, 119, 0);
 }
 
-#category, #related {
+#category, #related,#detail-category,#detail-related {
     margin: 0;
     font-size: 15px;
 }
