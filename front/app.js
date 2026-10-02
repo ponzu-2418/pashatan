@@ -111,7 +111,7 @@ async function loadWords(){
             mark.className = "mark ok";
             mark.textContent = "〇";
             }else{
-                mark.clssName = "mark ng";
+                mark.className = "mark ng";
                 mark.textContent = "×";
             
             }
@@ -134,7 +134,7 @@ async function loadWords(){
 
             const li = document.createElement("li");
             li.className = "word-item";
-            li.append(img,text);
+            li.append(mark,img,text);
             li.addEventListener("click", () => {
                 showWordDetail(w);
             });
@@ -150,7 +150,7 @@ function showWordDetail(w){
     document.getElementById("detail-photo").src = SERVER + w.image_url;
     document.getElementById("detail-en").textContent = w.word;
     document.getElementById("detail-ja").textContent = w.japanese;
-    document.getElementById("detail-explan").textContent = w.explanation || "解説はあだありません";
+    document.getElementById("detail-explan").textContent = w.explanation || "解説はまだありません";
     showScreen("screen-word");
 }
 console.log("パシャ単を起動しました");
