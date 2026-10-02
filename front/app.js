@@ -183,7 +183,7 @@ function showWordDetail(w){
     document.getElementById("detail-ja").textContent = w.japanese;
     document.getElementById("detail-explan").textContent = w.explanation || "解説はまだありません";
     document.getElementById("detail-category").textContent = w.category || "-";
-    document.getElementById("detail-related").textContend = w.related || "-";
+    document.getElementById("detail-related").textContent = w.related || "-";
     showScreen("screen-word");
 }
 console.log("パシャ単を起動しました");
