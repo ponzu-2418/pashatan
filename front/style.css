@@ -38,6 +38,9 @@ span{
     min-height: 100dvh;
 }
 
+#screen-title{
+    justify-content:center;
+}
 #screen-quiz{
     justify-content: flex-start;
 }

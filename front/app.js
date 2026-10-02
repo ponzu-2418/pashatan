@@ -275,7 +275,7 @@ document.getElementById("next-review").addEventListener("click", ()=> {
 })
 
 document.getElementById("speak-result").addEventListener("click", () =>{
-    speak(document.getElementById("word-en").textContent);
+    speak(document.getElementById("word").textContent);
 });
 
 document.getElementById("speak-detail").addEventListener("click", () =>{
