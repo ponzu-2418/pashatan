@@ -71,8 +71,10 @@ async function startReview(){
 function showResult(result){
     if(result.correct){
         document.getElementById("correct").textContent = "正解！";
+        playSfx("sfx-correct");
     }else{
         document.getElementById("correct").textContent = "不正解！";
+        playSfx("sfx-wrong");
     }
     document.getElementById("word").textContent = result.answer;
     document.getElementById("japanese").textContent = result.japanese;
@@ -111,6 +113,12 @@ function speak(word) {
     const voice = new SpeechSynthesisUtterance(word);
     voice.lang = "en-Us";
     speechSynthesis.speak(voice);
+}
+
+function playSfx(id){
+    const sound = document.getElementById(id);
+    sound.currentTime = 0;
+    sound.play();
 }
 
 async function loadStats(){
@@ -281,3 +289,15 @@ document.getElementById("speak-result").addEventListener("click", () =>{
 document.getElementById("speak-detail").addEventListener("click", () =>{
     speak(document.getElementById("detail-en").textContent);
 });
+
+document.addEventListener("click", () => {
+    ["sfx-correct", "sfx-wrong"].forEach((id) => {
+        const sound = document.getElementById(id);
+        sound.muted = true;
+        sound.play().then(() => {
+            sound.pause();
+            sound.currentTime = 0;
+            sound.muted = false;
+        });
+    });
+}, { once: true });
