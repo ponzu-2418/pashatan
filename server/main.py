@@ -62,7 +62,7 @@ def create_quiz(image: UploadFile = File(...)):
     img.thumbnail((800, 800))
     top = judge.top4(center_crop(img))
     print("判定結果:", [(w, round(s, 2)) for w, s in top], flush=True)
-    
+
     # 1位の確率が低すぎたら、問題を作らずにエラーを返す
     if top[0][1] < MIN_SCORE:
         raise HTTPException(
@@ -112,7 +112,6 @@ def check_answer(data: Answer):
         "streak_up": first_today,
     }
 
-
 # ③ 記録を見る
 @app.get("/stats")
 def get_stats():
@@ -128,6 +127,8 @@ def get_stats():
     # 今日の回答だけを集める
     today_list = []
     for r in records:
+        if r["word"] not in WORDS:
+            continue   # 単語リストから消した単語は飛ばす
         if r["datetime"].startswith(today):
             today_list.append({
                 "word": r["word"],
@@ -143,19 +144,27 @@ def get_stats():
         "today": today_list,
     }
 
-
 # ④ 単語帳
 @app.get("/words")
 def get_words():
     book = {}   # 単語 → その単語の集計
     for r in load_records():
         w = r["word"]
+        if w not in WORDS:
+            continue   # 単語リストから消した単語は飛ばす
         if w not in book:
-            book[w] = {"word": w, "japanese": WORDS[w]["japanese"], "seen": 0, "correct": 0}
+            book[w] = {
+                "word": w,
+                "japanese": WORDS[w]["japanese"],
+                "explanation": WORDS[w]["explanation"],
+                "seen": 0,
+                "correct": 0,
+            }
         book[w]["seen"] += 1
         book[w]["correct"] += int(r["correct"])
-        book[w]["image_url"] = r["image_url"]   # 後の記録で上書きされるので、最新の写真が残る
+        book[w]["image_url"] = r["image_url"]        # 後の記録で上書き → 最新の写真
         book[w]["last_seen"] = r["datetime"]
+        book[w]["last_correct"] = r["correct"] == "1"   # 後の記録で上書き → 最後の結果
 
     # 最後に出た日が新しい順に並べる
     return sorted(book.values(), key=lambda b: b["last_seen"], reverse=True)
