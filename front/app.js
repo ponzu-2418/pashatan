@@ -21,6 +21,7 @@ function showQuestion(quiz){
 
 let quizId = null;
 let isReview = false;
+let reviewRemaining = 0;
 
 async function createQuiz(file){
     try{
@@ -61,6 +62,7 @@ async function startReview(){
         }
 
         quizId = quiz.quiz_id;
+        reviewRemaining = quiz.remaining;
         photo.src = SERVER + quiz.image_url;
         showQuestion(quiz);
     }catch(error){
@@ -81,8 +83,13 @@ function showResult(result){
     document.getElementById("explan").textContent = result.explanation;
     document.getElementById("category").textContent = result.category;
     document.getElementById("related").textContent = result.related;
-    document.getElementById("next-review").hidden = !isReview;
-    document.getElementById("retake").hidden = isReview;
+    let left = reviewRemaining;
+    if(result.correct){
+        left = left- 1;
+    }
+    const hasNext = isReview && left >0;
+    document.getElementById("next-review").hidden = !hasNext;
+    document.getElementById("retake").hidden = hasNext;
     showScreen("screen-result");
 }
 
