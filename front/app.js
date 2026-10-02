@@ -77,6 +77,8 @@ function showResult(result){
     document.getElementById("word").textContent = result.answer;
     document.getElementById("japanese").textContent = result.japanese;
     document.getElementById("explan").textContent = result.explanation;
+    document.getElementById("category").textContent = result.category;
+    document.getElementById("related").textContent = result.related;
     document.getElementById("next-review").hidden = !isReview;
     document.getElementById("retake").hidden = isReview;
     showScreen("screen-result");
