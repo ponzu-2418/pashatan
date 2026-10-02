@@ -17,7 +17,3 @@
 - 作業を始める前にプル、終わったらプッシュ
 - 自分のフォルダ以外は触らない
 - 動かない状態ではプッシュしない
-
-## ターミナルが開くたびにする
-cd C:\oit\home\python\pashatan\server
-$env:PYTHONPATH = ""
