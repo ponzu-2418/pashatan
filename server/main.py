@@ -8,7 +8,7 @@ import random
 from datetime import datetime
 from PIL import Image, ImageOps
 from clip_model import load_words, ClipJudge
-from records import load_records, save_record, calc_streak, review_list
+from records import load_records, save_record, calc_streak, review_list, word_accuracy
 import csv
 
 app = FastAPI()
@@ -131,11 +131,9 @@ def get_stats():
     records = load_records()
     today = datetime.now().strftime("%Y-%m-%d")
 
-    # 正答率（まだ回答がなければ 0）
-    if records:
-        accuracy = sum(int(r["correct"]) for r in records) / len(records)
-    else:
-        accuracy = 0
+    # 正答率（単語ごとの最後の結果で計算する）
+    known = [r for r in records if r["word"] in WORDS]
+    accuracy = word_accuracy(known)
 
     # 今日の回答だけを集める
     today_list = []

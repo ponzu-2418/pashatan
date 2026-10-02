@@ -42,3 +42,15 @@ def review_list(records):
     for r in records:
         last[r["word"]] = r   # 後の記録で上書き → 単語ごとの「最後の回答」が残る
     return [r for r in last.values() if r["correct"] == "0"]
+
+def word_accuracy(records):
+    last = {}
+    for r in records:
+        last[r["word"]] = r          # 同じ単語は、あとの記録で上書きされる
+    if len(last) == 0:
+        return 0
+    correct = 0
+    for r in last.values():
+        if r["correct"] == "1":
+            correct += 1
+    return round(correct / len(last), 2)
