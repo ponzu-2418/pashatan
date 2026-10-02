@@ -289,3 +289,17 @@ document.getElementById("speak-result").addEventListener("click", () =>{
 document.getElementById("speak-detail").addEventListener("click", () =>{
     speak(document.getElementById("detail-en").textContent);
 });
+
+document.addEventListener("click", () => {
+    ["sfx-correct", "sfx-wrong"].forEach((id) => {
+        const sound = document.getElementById(id);
+        sound.muted = true;
+        sound.play().then(() => {
+            sound.pause();
+            sound.currentTime = 0;
+            sound.muted = false;
+        }).catch(() => {
+            sound.muted = false;
+        });
+    });
+}, { once: true });
