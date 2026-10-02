@@ -166,3 +166,336 @@ train,屋外・乗り物,platform（ホーム）／departure（出発）
 truck,屋外・乗り物,load（荷物を積む）／shipment（発送品）
 dog,その他,leash（リード）／pet（ペット）
 cat,その他,pet（ペット）／veterinarian（獣医）
+microphone,オフィス,presentation（発表）／audience（聴衆）
+shredder,オフィス,confidential（機密の）／dispose of（〜を処分する）
+bulletin board,オフィス,notice（お知らせ）／post（掲示する）
+locker,オフィス,belongings（持ち物）／store（保管する）
+name tag,オフィス,attendee（参加者）／registration（登録）
+fire extinguisher,オフィス,emergency（緊急事態）／safety inspection（安全点検）
+cash register,オフィス,cashier（レジ係）／purchase（購入）
+menu,読み物,order（注文する）／dish（料理）
+glue stick,文房具,attach（貼り付ける）／adhesive（接着剤）
+pencil case,文房具,stationery（文房具）／zipper（ファスナー）
+hole punch,文房具,binder（バインダー）／file（とじる）
+rubber band,文房具,bundle（束ねる）／stretch（伸びる）
+thumbtack,文房具,pin（ピンでとめる）／bulletin board（掲示板）
+magnet,文房具,attach（取り付ける）／stick（くっつく）
+paintbrush,文房具,paint（塗る）／renovation（改装）
+ladder,日用品,climb（上る）／lean against（〜に立てかける）
+toolbox,日用品,equipment（道具・備品）／repair（修理する）
+hammer,日用品,nail（くぎ）／construction（建設）
+screwdriver,日用品,screw（ねじ）／assemble（組み立てる）
+tape measure,日用品,measure（測る）／dimensions（寸法）
+flashlight,日用品,power outage（停電）／battery（電池）
+broom,日用品,sweep（はく）／dustpan（ちりとり）
+mop,日用品,wipe（ふく）／janitor（清掃員）
+bucket,日用品,fill（満たす）／carry（運ぶ）
+scale,日用品,weigh（重さを量る）／weight（重さ）
+padlock,日用品,lock（鍵をかける）／secure（安全な）
+clothespin,日用品,laundry（洗濯物）／hang（つるす）
+laundry basket,日用品,laundry（洗濯物）／detergent（洗剤）
+bandage,日用品,injury（けが）／first aid（応急手当）
+thermometer,日用品,temperature（温度）／fever（熱）
+medicine,日用品,pharmacy（薬局）／prescription（処方せん）
+nail clipper,日用品,trim（切りそろえる）／grooming（身だしなみ）
+shopping basket,日用品,grocery（食料品）／checkout（会計）
+vacuum cleaner,家電,vacuum（掃除機をかける）／carpet（じゅうたん）
+washing machine,家電,laundry（洗濯物）／appliance（家電製品）
+iron,家電,wrinkle（しわ）／press（アイロンをかける）
+air conditioner,家電,maintenance（保守点検）／temperature（温度）
+stove,家電,boil（沸かす）／burner（火口）
+game controller,電子機器,device（機器）／wireless（無線の）
+tripod,電子機器,photographer（写真家）／adjust（調整する）
+power outlet,電子機器,plug in（差し込む）／electricity（電気）
+faucet,家具・部屋,plumber（配管工）／leak（水漏れ）
+bathtub,家具・部屋,bathroom（浴室）／drain（排水口）
+toilet,家具・部屋,restroom（お手洗い）／flush（水を流す）
+blinds,家具・部屋,adjust（調整する）／shade（日よけ）
+doorknob,家具・部屋,handle（取っ手）／entrance（入口）
+light switch,家具・部屋,turn on（つける）／turn off（消す）
+can,食器・台所,canned food（缶詰）／recycle（再利用する）
+jar,食器・台所,lid（ふた）／preserve（保存する）
+straw,食器・台所,beverage（飲み物）／disposable（使い捨ての）
+ladle,食器・台所,scoop（すくう）／serve（料理を出す）
+spatula,食器・台所,flip（ひっくり返す）／utensil（調理器具）
+whisk,食器・台所,stir（かき混ぜる）／ingredient（材料）
+colander,食器・台所,drain（水を切る）／rinse（すすぐ）
+rice,食べ物,grain（穀物）／serving（1人前）
+noodles,食べ物,boil（ゆでる）／broth（だし）
+salad,食べ物,dressing（ドレッシング）／appetizer（前菜）
+hamburger,食べ物,fast food（ファストフード）／takeout（持ち帰り）
+french fries,食べ物,side dish（付け合わせ）／fried（揚げた）
+sushi,食べ物,seafood（魚介類）／cuisine（料理）
+cookie,食べ物,bake（焼く）／bakery（パン屋）
+chocolate,食べ物,sweet（甘い）／gift（贈り物）
+ice cream,食べ物,dessert（デザート）／flavor（味）
+cheese,食べ物,dairy（乳製品）／slice（薄切り）
+milk,食べ物,dairy（乳製品）／carton（紙パック）
+cucumber,食べ物,vegetable（野菜）／slice（薄く切る）
+cabbage,食べ物,produce（農産物）／chop（刻む）
+broccoli,食べ物,nutrition（栄養）／steam（蒸す）
+mushroom,食べ物,ingredient（材料）／harvest（収穫）
+corn,食べ物,crop（作物）／grain（穀物）
+pineapple,食べ物,tropical（熱帯の）／import（輸入する）
+watermelon,食べ物,seasonal（季節の）／refreshing（さわやかな）
+peach,食べ物,ripe（熟した）／orchard（果樹園）
+jeans,衣類,casual（普段着の）／dress code（服装規定）
+dress,衣類,formal（正式な）／attire（服装）
+apron,衣類,chef（料理人）／uniform（制服）
+slippers,衣類,indoor（室内の）／footwear（履物）
+briefcase,持ち物,commute（通勤する）／document（書類）
+banknote,持ち物,currency（通貨）／exchange（両替する）
+bracelet,持ち物,jewelry（宝飾品）／accessory（装飾品）
+railing,屋外・乗り物,lean on（〜にもたれる）／staircase（階段）
+mailbox,屋外・乗り物,deliver（配達する）／package（小包）
+streetlight,屋外・乗り物,install（設置する）／pedestrian（歩行者）
+crosswalk,屋外・乗り物,pedestrian（歩行者）／intersection（交差点）
+bridge,屋外・乗り物,construction（建設）／cross（渡る）
+tree,屋外・乗り物,shade（日かげ）／branch（枝・支店）
+motorcycle,屋外・乗り物,vehicle（乗り物）／park（駐車する）
+airplane,屋外・乗り物,boarding pass（搭乗券）／departure（出発）
+boat,屋外・乗り物,dock（船着き場）／harbor（港）
+escalator,屋外・乗り物,floor（階）／handrail（手すり）
+shopping cart,屋外・乗り物,push（押す）／aisle（通路）
+traffic cone,屋外・乗り物,road work（道路工事）／detour（迂回路）
+ATM,屋外・乗り物,withdraw（引き出す）／deposit（預け入れる）
+stuffed animal,その他,toy（おもちゃ）／souvenir（おみやげ）
+balloon,その他,celebration（お祝い）／decorate（飾る）
+globe,その他,global（世界的な）／overseas（海外の）
+guitar,その他,instrument（楽器）／performance（演奏）
+piano,その他,recital（演奏会）／instrument（楽器）
+playing cards,その他,deck（一組）／shuffle（切り混ぜる）
+racket,その他,court（コート）／tournament（大会）
+ink cartridge,オフィス,replace（交換する）／office supplies（事務用品）
+safe,オフィス,valuables（貴重品）／secure（安全な）
+trophy,オフィス,award（賞）／achievement（業績）
+blackboard,オフィス,lecture（講義）／erase（消す）
+crayon,文房具,draw（描く）／colorful（色とりどりの）
+chalk,文房具,blackboard（黒板）／dust（粉）
+origami,文房具,fold（折る）／craft（工芸）
+sticker,文房具,label（ラベル）／peel off（はがす）
+pencil sharpener,文房具,sharp（鋭い）／blade（刃）
+bookmark,文房具,page（ページ）／novel（小説）
+cotton swab,日用品,hygiene（衛生）／disposable（使い捨ての）
+lipstick,日用品,cosmetics（化粧品）／apply（塗る）
+perfume,日用品,fragrance（香り）／scent（におい）
+sunscreen,日用品,protect（守る）／lotion（ローション）
+detergent,日用品,laundry（洗濯物）／stain（しみ）
+dustpan,日用品,broom（ほうき）／sweep（はく）
+spray bottle,日用品,spray（吹きかける）／refill（詰め替える）
+lighter,日用品,flame（炎）／fuel（燃料）
+thread,日用品,sew（ぬう）／fabric（布地）
+button,日用品,fasten（とめる）／press（押す）
+wrench,日用品,tighten（締める）／mechanic（整備士）
+pliers,日用品,grip（つかむ）／wire（針金）
+drill,日用品,install（取り付ける）／fire drill（避難訓練）
+hose,日用品,water（水をやる）／garden（庭）
+watering can,日用品,water（水をやる）／gardening（園芸）
+rope,日用品,tie（結ぶ）／secure（固定する）
+first aid kit,日用品,first aid（応急手当）／injury（けが）
+blender,家電,mix（混ぜる）／ingredient（材料）
+dishwasher,家電,appliance（家電製品）／rinse（すすぐ）
+humidifier,家電,humid（湿気の多い）／moisture（水分）
+heater,家電,heat（暖める）／energy bill（光熱費）
+sewing machine,家電,sew（ぬう）／fabric（布地）
+shaver,家電,shave（そる）／rechargeable（充電式の）
+SD card,電子機器,storage（保存容量）／insert（差し込む）
+intercom,電子機器,visitor（来客）／entrance（入口）
+security camera,電子機器,surveillance（監視）／monitor（監視する）
+coat rack,家具・部屋,hang（掛ける）／entrance（入口）
+closet,家具・部屋,storage（収納）／organize（整理する）
+shower,家具・部屋,bathroom（浴室）／rinse（洗い流す）
+fish tank,家具・部屋,aquarium（水族館）／lobby（ロビー）
+pitcher,食器・台所,pour（注ぐ）／refill（おかわりを注ぐ）
+bottle opener,食器・台所,open（開ける）／beverage（飲み物）
+can opener,食器・台所,canned food（缶詰）／utensil（調理器具）
+peeler,食器・台所,peel（皮をむく）／vegetable（野菜）
+grater,食器・台所,grate（すりおろす）／cheese（チーズ）
+tongs,食器・台所,grab（つかむ）／serve（取り分ける）
+plastic wrap,食器・台所,wrap（包む）／leftovers（残り物）
+aluminum foil,食器・台所,wrap（包む）／bake（焼く）
+oven mitt,食器・台所,oven（オーブン）／heat（熱）
+coaster,食器・台所,beverage（飲み物）／surface（表面）
+sausage,食べ物,grill（焼く）／breakfast（朝食）
+fish,食べ物,seafood（魚介類）／fresh（新鮮な）
+shrimp,食べ物,seafood（魚介類）／allergy（アレルギー）
+tofu,食べ物,soybean（大豆）／vegetarian（菜食主義者）
+yogurt,食べ物,dairy（乳製品）／breakfast（朝食）
+butter,食べ物,spread（塗る）／dairy（乳製品）
+ketchup,食べ物,sauce（ソース）／condiment（調味料）
+curry,食べ物,spicy（辛い）／ingredient（材料）
+dumpling,食べ物,steam（蒸す）／filling（中身）
+rice ball,食べ物,snack（軽食）／seaweed（のり）
+pancake,食べ物,syrup（シロップ）／flour（小麦粉）
+pudding,食べ物,dessert（デザート）／custard（カスタード）
+candy,食べ物,sweet（甘い）／wrapper（包み紙）
+potato chips,食べ物,snack（軽食）／crispy（サクサクした）
+popcorn,食べ物,snack（軽食）／theater（映画館）
+avocado,食べ物,ripe（熟した）／nutrition（栄養）
+garlic,食べ物,flavor（風味）／chop（刻む）
+green pepper,食べ物,vegetable（野菜）／bitter（苦い）
+eggplant,食べ物,vegetable（野菜）／grill（焼く）
+pumpkin,食べ物,harvest（収穫）／seasonal（季節の）
+shorts,衣類,casual（普段着の）／summer（夏）
+skirt,衣類,attire（服装）／length（丈）
+pajamas,衣類,comfortable（快適な）／sleepwear（寝間着）
+raincoat,衣類,waterproof（防水の）／forecast（天気予報）
+boots,衣類,footwear（履物）／leather（革）
+sandals,衣類,footwear（履物）／casual（普段着の）
+earrings,持ち物,jewelry（宝飾品）／accessory（装飾品）
+handkerchief,持ち物,wipe（ふく）／fold（たたむ）
+parking lot,屋外・乗り物,park（駐車する）／vehicle（乗り物）
+ambulance,屋外・乗り物,emergency（緊急事態）／patient（患者）
+skateboard,屋外・乗り物,ride（乗る）／balance（バランス）
+utility pole,屋外・乗り物,power line（電線）／electricity（電気）
+fountain,屋外・乗り物,plaza（広場）／landmark（目印になる建物）
+statue,屋外・乗り物,monument（記念碑）／sculpture（彫刻）
+flag,屋外・乗り物,pole（ポール）／wave（はためく）
+tent,屋外・乗り物,set up（設置する）／outdoor event（屋外イベント）
+stroller,屋外・乗り物,push（押す）／infant（乳児）
+wheelchair,屋外・乗り物,accessible（利用しやすい）／ramp（スロープ）
+bird,その他,feather（羽）／nest（巣）
+butterfly,その他,insect（昆虫）／garden（庭）
+dice,その他,roll（転がす）／chance（偶然）
+puzzle,その他,piece（ピース）／solve（解く）
+magnifying glass,その他,magnify（拡大する）／inspect（検査する）
+medal,その他,award（賞）／competition（競技会）
+bell,その他,ring（鳴る）／reception（受付）
+violin,その他,orchestra（オーケストラ）／instrument（楽器）
+baseball bat,その他,swing（振る）／stadium（球場）
+dumbbell,その他,fitness center（ジム）／workout（運動）
+yoga mat,その他,exercise（運動）／stretch（伸ばす）
+piggy bank,その他,savings（貯金）／deposit（預け入れる）
+lanyard,オフィス,ID badge（身分証）／wear（身に着ける）
+ink pad,オフィス,stamp（押印する）／approve（承認する）
+paperweight,オフィス,weight（重さ）／document（書類）
+water cooler,オフィス,break room（休憩室）／refill（補充する）
+podium,オフィス,speaker（講演者）／address（演説する）
+easel,オフィス,display（展示する）／canvas（キャンバス）
+paper cutter,オフィス,trim（切りそろえる）／blade（刃）
+cubicle,オフィス,workstation（作業場所）／partition（仕切り）
+price tag,オフィス,retail（小売り）／discount（割引）
+barcode,オフィス,scan（読み取る）／inventory（在庫）
+display case,オフィス,merchandise（商品）／exhibit（展示する）
+mannequin,オフィス,garment（衣服）／window display（店頭の展示）
+emergency exit,オフィス,evacuate（避難する）／emergency（緊急事態）
+brochure,読み物,leaflet（チラシ）／distribute（配布する）
+postcard,読み物,mail（郵送する）／souvenir（おみやげ）
+coupon,読み物,voucher（引換券）／redeem（引き換える）
+instruction manual,読み物,instructions（指示）／assemble（組み立てる）
+protractor,文房具,angle（角度）／measure（測る）
+utility knife,文房具,blade（刃）／cardboard（段ボール）
+ribbon,文房具,wrap（包む）／decorate（飾る）
+wrapping paper,文房具,gift-wrap（贈り物用に包む）／package（包み）
+abacus,文房具,calculate（計算する）／bead（玉）
+toothpick,日用品,disposable（使い捨ての）／wooden（木製の）
+tweezers,日用品,pick up（つまむ）／precise（正確な）
+nail polish,日用品,cosmetics（化粧品）／apply（塗る）
+eye drops,日用品,pharmacy（薬局）／irritation（刺激）
+dental floss,日用品,dentist（歯科医）／hygiene（衛生）
+plunger,日用品,clog（つまらせる）／plumber（配管工）
+duster,日用品,dust（ほこり）／wipe（ふく）
+lint roller,日用品,remove（取り除く）／garment（衣服）
+drying rack,日用品,laundry（洗濯物）／hang（つるす）
+doormat,日用品,entrance（入口）／wipe（ふく）
+hinge,日用品,attach（取り付ける）／loose（ゆるい）
+saw,日用品,lumber（木材）／carpenter（大工）
+nail,日用品,hammer（ハンマー）／fasten（固定する）
+screw,日用品,screwdriver（ドライバー）／tighten（締める）
+paint roller,日用品,renovate（改装する）／coat（塗りの層）
+sandpaper,日用品,smooth（なめらかな）／polish（みがく）
+shovel,日用品,dig（掘る）／soil（土）
+rake,日用品,leaves（葉）／gather（集める）
+zipper,日用品,fasten（とめる）／garment（衣服）
+safety pin,日用品,fasten（とめる）／temporary（一時的な）
+syringe,日用品,vaccine（ワクチン）／clinic（診療所）
+crutches,日用品,injury（けが）／support（支える）
+thermostat,電子機器,adjust（調整する）／heating（暖房）
+smoke detector,電子機器,alarm（警報）／install（設置する）
+drone,電子機器,aerial（空中の）／remote（遠隔の）
+record player,電子機器,vinyl（レコード盤）／vintage（年代物の）
+stopwatch,電子機器,measure（測る）／lap（1周）
+stool,家具・部屋,counter（カウンター）／seat（座席）
+chandelier,家具・部屋,ceiling（天井）／lobby（ロビー）
+vent,家具・部屋,ventilation（換気）／air conditioning（空調）
+fireplace,家具・部屋,cozy（居心地のよい）／lounge（ラウンジ）
+balcony,家具・部屋,overlook（見渡す）／railing（手すり）
+crib,家具・部屋,infant（乳児）／nursery（子ども部屋）
+hallway,家具・部屋,corridor（廊下）／lead to（〜に通じる）
+shutter,家具・部屋,close（閉める）／storefront（店先）
+pillar,家具・部屋,column（円柱）／support（支える）
+aisle,家具・部屋,shelf（棚）／aisle seat（通路側の席）
+dish rack,食器・台所,dry（乾かす）／dishes（食器）
+place mat,食器・台所,set the table（食卓を整える）／dining（食事）
+salt shaker,食器・台所,seasoning（調味料）／sprinkle（振りかける）
+rolling pin,食器・台所,dough（生地）／flatten（平らにする）
+measuring cup,食器・台所,measure（量る）／recipe（レシピ）
+timer,食器・台所,set（設定する）／remind（思い出させる）
+funnel,食器・台所,pour（注ぐ）／liquid（液体）
+skewer,食器・台所,grill（焼く）／barbecue（バーベキュー）
+muffin,食べ物,bakery（パン屋）／pastry（焼き菓子）
+croissant,食べ物,bakery（パン屋）／pastry（焼き菓子）
+cereal,食べ物,grain（穀物）／breakfast（朝食）
+ice cube,食べ物,chill（冷やす）／melt（溶ける）
+melon,食べ物,ripe（熟した）／slice（薄切り）
+kiwi,食べ物,vitamin（ビタミン）／peel（皮をむく）
+cherry,食べ物,blossom（花）／seasonal（季節の）
+blueberry,食べ物,berry（ベリー）／jam（ジャム）
+mango,食べ物,tropical（熱帯の）／import（輸入する）
+pear,食べ物,orchard（果樹園）／juicy（みずみずしい）
+spinach,食べ物,leafy（葉の多い）／nutrition（栄養）
+beans,食べ物,protein（たんぱく質）／canned（缶詰の）
+ginger,食べ物,spice（香辛料）／flavor（風味）
+chili pepper,食べ物,spicy（辛い）／seasoning（調味料）
+seaweed,食べ物,ocean（海）／dried（乾燥した）
+steak,食べ物,grill（焼く）／entree（主菜）
+fried chicken,食べ物,fried（揚げた）／crispy（サクサクした）
+bacon,食べ物,breakfast（朝食）／slice（薄切り）
+omelet,食べ物,egg（卵）／brunch（ブランチ）
+hot dog,食べ物,vendor（売り子）／stand（屋台）
+tea bag,食べ物,steep（ひたす）／beverage（飲み物）
+coffee beans,食べ物,roast（焙煎する）／grind（ひく）
+nuts,食べ物,allergy（アレルギー）／snack（軽食）
+chewing gum,食べ物,chew（かむ）／flavor（味）
+hoodie,衣類,hood（フード）／casual（普段着の）
+safety vest,衣類,construction site（工事現場）／visible（目に見える）
+swimsuit,衣類,pool（プール）／resort（リゾート）
+cooler,持ち物,picnic（ピクニック）／beverage（飲み物）
+binoculars,持ち物,view（眺め）／sightseeing（観光）
+compass,持ち物,direction（方角）／navigate（進路を決める）
+sleeping bag,持ち物,camping（キャンプ）／outdoor（屋外の）
+lantern,持ち物,light（明かり）／camping（キャンプ）
+goggles,持ち物,protective（保護用の）／laboratory（実験室）
+awning,屋外・乗り物,storefront（店先）／shade（日かげ）
+scaffolding,屋外・乗り物,construction site（工事現場）／renovation（改装）
+wheelbarrow,屋外・乗り物,push（押す）／load（荷を積む）
+lawn mower,屋外・乗り物,mow（刈る）／landscaping（造園）
+forklift,屋外・乗り物,warehouse（倉庫）／load（荷を積む）
+pallet,屋外・乗り物,stack（積み重ねる）／shipment（発送品）
+crate,屋外・乗り物,stack（積み重ねる）／unload（荷を下ろす）
+excavator,屋外・乗り物,dig（掘る）／construction（建設）
+tire,屋外・乗り物,flat tire（パンク）／replace（交換する）
+steering wheel,屋外・乗り物,steer（操縦する）／driver（運転手）
+windshield,屋外・乗り物,wiper（ワイパー）／crack（ひび）
+license plate,屋外・乗り物,register（登録する）／vehicle（乗り物）
+seat belt,屋外・乗り物,fasten（締める）／passenger（乗客）
+parking meter,屋外・乗り物,fee（料金）／fine（罰金）
+helicopter,屋外・乗り物,aerial（空中の）／land（着陸する）
+ramp,屋外・乗り物,accessible（利用しやすい）／wheelchair（車いす）
+gate,屋外・乗り物,entrance（入口）／boarding gate（搭乗口）
+lawn,屋外・乗り物,mow（刈る）／landscaping（造園）
+pier,屋外・乗り物,dock（船着き場）／harbor（港）
+curb,屋外・乗り物,sidewalk（歩道）／park（駐車する）
+turnstile,屋外・乗り物,admission（入場）／pass through（通り抜ける）
+sprinkler,屋外・乗り物,irrigation（水やり）／lawn（芝生）
+banner,屋外・乗り物,advertise（宣伝する）／hang（つるす）
+pond,その他,reflect（映す）／surround（囲む）
+puddle,その他,rain（雨）／step in（踏み入れる）
+branch,その他,branch office（支店）／trim（刈り込む）
+leaf,その他,fall（落ちる）／rake（かき集める）
+rainbow,その他,weather（天気）／appear（現れる）
+moon,その他,full moon（満月）／lunar（月の）
+cloud,その他,forecast（天気予報）／overcast（くもりの）
+mountain,その他,scenery（景色）／hike（ハイキングする）
+river,その他,bank（岸・銀行）／flow（流れる）
+whistle,その他,referee（審判）／signal（合図する）
