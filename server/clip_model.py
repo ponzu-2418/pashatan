@@ -2,6 +2,7 @@
 import csv
 from PIL import Image
 from transformers import CLIPModel, CLIPProcessor
+import torch
 
 MODEL_NAME = "openai/clip-vit-base-patch16"
 
@@ -30,17 +31,26 @@ class ClipJudge:
         self.processor = CLIPProcessor.from_pretrained(MODEL_NAME)
         self.words = list(words)
         self.texts = [f"a photo of a {PROMPT_NAMES.get(w, w)}" for w in self.words]
+                # 単語の文を、最初に1回だけ数字に変換して覚えておく
+        with torch.no_grad():
+            inputs = self.processor(text=self.texts, return_tensors="pt", padding=True)
+            feats = self.model.get_text_features(**inputs).pooler_output
+            self.text_feats = feats / feats.norm(dim=-1, keepdim=True)
         print("読み込み完了")
 
     # ③ 写真を受け取って、上位4つの (単語, 確率) を返す
     def top4(self, image):
-        inputs = self.processor(text=self.texts, images=image, return_tensors="pt", padding=True)
-        outputs = self.model(**inputs)
-        probs = outputs.logits_per_image.softmax(dim=1)[0]
+        with torch.no_grad():
+            # 写真だけを数字に変換する（単語はもう変換済み）
+            inputs = self.processor(images=image, return_tensors="pt")
+            feats = self.model.get_image_features(**inputs).pooler_output
+            feats = feats / feats.norm(dim=-1, keepdim=True)
+            # 写真と、覚えておいた単語167個の「近さ」をまとめて計算する
+            logits = self.model.logit_scale.exp() * feats @ self.text_feats.T
+            probs = logits.softmax(dim=1)[0]
         pairs = list(zip(self.words, probs.tolist()))
         pairs.sort(key=lambda p: p[1], reverse=True)
         return pairs[:4]
-
 
 # ④ このファイルを直接実行したときだけ動くテスト
 if __name__ == '__main__':

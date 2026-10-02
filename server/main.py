@@ -10,6 +10,7 @@ from PIL import Image, ImageOps
 from clip_model import load_words, ClipJudge
 from records import load_records, save_record, calc_streak, review_list, word_accuracy
 import csv
+import time
 
 app = FastAPI()
 
@@ -70,7 +71,11 @@ def create_quiz(image: UploadFile = File(...)):
     img = ImageOps.exif_transpose(img)
     img = img.convert("RGB")
     img.thumbnail((800, 800))
+
+    start = time.time()
     top = judge.top4(center_crop(img))
+    print("判定時間:", round(time.time() - start, 2), "秒", flush=True)
+
     print("判定結果:", [(w, round(s, 2)) for w, s in top], flush=True)
 
     # 1位の確率が低すぎたら、問題を作らずにエラーを返す
