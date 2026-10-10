@@ -22,6 +22,8 @@ function showQuestion(quiz){
 let quizId = null;
 let isReview = false;
 let reviewRemaining = 0;
+let allWords = [];
+let currentCategory = "すべて";
 
 async function createQuiz(file){
     try{
@@ -145,66 +147,17 @@ async function loadStats(){
 }
 
 async function loadWords(){
-    try{
+     try {
         const res = await fetch(SERVER + "/words");
-        if (!res.ok){
+        if (!res.ok) {
             throw new Error("サーバーに断られました");
         }
         const words = await res.json();
         document.getElementById("word-count").textContent = words.length + "個の単語を集めたよ";
-
-        const list = document.getElementById("record-list");
-        list.innerHTML = "";
-
-        words.sort((a,b) => (a.category || "その他").localeCompare(b.category || "その他"));
-
-        let lastCategory = null;
-
-        words.forEach((w) => {
-            const category = w.category || "その他";
-            if(category !== lastCategory){
-                const heading = document.createElement("li");
-                heading.className = "category-heading";
-                heading.textContent = category;
-                list.append(heading);
-                lastCategory = category;
-            }
-
-            const mark = document.createElement("span");
-            if(w.last_correct){
-            mark.className = "mark ok";
-            mark.textContent = "〇";
-            }else{
-                mark.className = "mark ng";
-                mark.textContent = "×";
-            
-            }
-            const img = document.createElement("img");
-            img.className = "word-photo";
-            img.src = SERVER + w.image_url;
-            img.alt = w.word;
-
-            const en = document.createElement("p");
-            en.className = "word-en";
-            en.textContent = w.word;
-
-            const ja = document.createElement("p");
-            ja.className= "word-ja"
-            ja.textContent = w.japanese;
-
-            const text = document.createElement("div");
-            text.className ="word-text";
-            text.append(en,ja);
-
-            const li = document.createElement("li");
-            li.className = "word-item";
-            li.append(mark,img,text);
-            li.addEventListener("click", () => {
-                showWordDetail(w);
-            });
-            list.append(li);
-        });
-    }catch(error){
+        allWords = words;
+        renderFilter();
+        renderWords();
+    } catch (error) {
         console.error(error);
         showError("単語帳を読み込めませんでした。");
     }
@@ -219,11 +172,99 @@ function showWordDetail(w){
     document.getElementById("detail-related").textContent = w.related || "-";
     showScreen("screen-word");
 }
+
+function renderFilter(){
+    const filter = document.getElementById("category-filter");
+    filter.innerHTML = "";
+
+    const categories = ["すべて", ...new Set(allWords.map((w) => w.category || "その他"))];
+        categories.forEach((cat) => {
+        let count = allWords.length;
+        if (cat !== "すべて") {
+            count = allWords.filter((w) => (w.category || "その他") === cat).length;
+        }
+
+        const btn = document.createElement("button");
+        btn.className = cat === currentCategory ? "chip active" : "chip";
+        btn.textContent = cat;
+
+        const num = document.createElement("span");
+        num.className = "chip-count";
+        num.textContent = count;
+        btn.append(num);
+
+        btn.addEventListener("click", () => {
+            currentCategory = cat;
+            renderFilter();
+            renderWords();
+        });
+
+        filter.append(btn);
+    });
+}
+
+function renderWords(){
+    let words = allWords;
+    if(currentCategory != "すべて"){
+        words = allWords.filter((w) => (w.category || "その他") === currentCategory);
+    }
+
+    const list = document.getElementById("record-list");
+    list.innerHTML = "";
+
+    words.sort((a,b) => (a.category || "その他").localeCompare(b.category || "その他"));
+
+    let lastCategory = null;
+
+    words.forEach((w) => {
+        const category = w.category || "その他";
+        if(category !== lastCategory){
+            const heading = document.createElement("li");
+            heading.className = "category-heading";
+            heading.textContent = category;
+            list.append(heading);
+            lastCategory = category;
+        }
+
+        const mark = document.createElement("span");
+        if(w.last_correct){
+            mark.className = "mark ok";
+            mark.textContent = "〇";
+        }else{
+            mark.className = "mark ng";
+            mark.textContent = "×";
+        }
+        const img = document.createElement("img");
+        img.className = "word-photo";
+        img.src = SERVER + w.image_url;
+        img.alt = w.word;
+        const en = document.createElement("p");
+        en.className = "word-en";
+        en.textContent = w.word;
+
+        const ja = document.createElement("p");
+        ja.className= "word-ja"
+        ja.textContent = w.japanese;
+
+        const text = document.createElement("div");
+        text.className ="word-text";
+        text.append(en,ja);
+
+        const li = document.createElement("li");
+        li.className = "word-item";
+        li.append(mark,img,text);
+        li.addEventListener("click", () => {
+            showWordDetail(w);
+        });
+        list.append(li);
+    });
+}
 console.log("パシャ単を起動しました");
 const recordButton = document.getElementById("record");
 const errorText = document.getElementById("error");
 
 recordButton.addEventListener("click" , () =>{
+    currentCategory = "すべて";
     showScreen("screen-record");
     loadStats();
     loadWords();

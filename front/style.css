@@ -375,3 +375,46 @@ span{
     color:red;
     white-space: pre-line;
 }
+
+.filter{
+    display: flex;
+    gap:8px;
+    width:100%;
+    overflow-x: auto;
+    margin-bottom: 12px;
+}
+
+.chip{
+    flex-shrink: 0;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 14px;
+    border-radius: 30px;
+    border: 3px  solid rgba(201,201,201,0.719);
+    background: white;
+    color: black;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.chip.active{
+    background: rgb(255, 119, 0);
+    border-color: rgb(255, 119, 0);
+    color:white;
+}
+
+.chip-count{
+    background:#efe6da;
+    border-radius:10px;
+    padding: 0 6px;
+    font-size:12px;
+    color:#6b5f55;
+}
+
+.chip.active .chip-count{
+    background: white;
+    color: rgb(179, 85, 2);
+}
