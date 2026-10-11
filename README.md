@@ -4,9 +4,6 @@
 
 > 世界の全ては英単語に
 
-<!-- スクリーンショットを docs/screenshot.png に置くと、ここに表示されます -->
-![パシャ単の画面](docs/screenshot.png)
-
 - デモ動画：https://drive.google.com/file/d/1WKLrZisrIcT6pHGOTq3p3oWFgF9cYx98/view?usp=sharing
 - 受賞：技育CAMP2026 9/17～10/3 優秀賞
 
