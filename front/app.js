@@ -1,5 +1,25 @@
 const SERVER = ""
 
+function getUserId() {
+    try {
+        let id = localStorage.getItem("pashatan-user-id");
+        if (!id) {
+            id = "u-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+            localStorage.setItem("pashatan-user-id", id);
+        }
+        return id;
+    } catch (error) {
+        return "u-" + Math.random().toString(36).slice(2, 10);
+    }
+}
+
+function apiFetch(path, options = {}) {
+    const headers = { ...(options.headers || {}), "X-User-Id": USER_ID };
+    return fetch(SERVER + path, { ...options, headers: headers });
+}
+
+const USER_ID = getUserId();
+
 function showScreen(id){
     const screens = document.querySelectorAll(".screen");
     screens.forEach((screen) => {
@@ -29,7 +49,7 @@ async function createQuiz(file){
     try{
         const form = new FormData();
         form.append("image",file);
-        const res = await fetch(SERVER + "/quiz", {
+        const res = await apiFetch(SERVER + "/quiz", {
             method: "POST",
             body: form
     });
@@ -48,7 +68,7 @@ async function createQuiz(file){
 async function startReview(){
     isReview = true;
     try{
-        const res = await fetch(SERVER + "/review");
+        const res = await apiFetch(SERVER + "/review");
         if(!res.ok){
             throw new Error("サーバーに断られました");
         }
@@ -97,7 +117,7 @@ function showResult(result){
 
 async function sendAnswer(choice){
     try {
-        const res = await fetch(SERVER + "/answer", {
+        const res = await apiFetch(SERVER + "/answer", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ quiz_id: quizId, choice: choice })
@@ -132,7 +152,7 @@ function playSfx(id){
 
 async function loadStats(){
     try{
-        const res = await fetch(SERVER + "/stats");
+        const res = await apiFetch(SERVER + "/stats");
         if(!res.ok){
             throw new Error("サーバーに断られました");
         }
@@ -148,7 +168,7 @@ async function loadStats(){
 
 async function loadWords(){
      try {
-        const res = await fetch(SERVER + "/words");
+        const res = await apiFetch(SERVER + "/words");
         if (!res.ok) {
             throw new Error("サーバーに断られました");
         }
