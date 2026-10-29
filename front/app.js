@@ -49,7 +49,7 @@ async function createQuiz(file){
     try{
         const form = new FormData();
         form.append("image",file);
-        const res = await apiFetch(SERVER + "/quiz", {
+        const res = await apiFetch("/quiz", {
             method: "POST",
             body: form
     });
@@ -68,7 +68,7 @@ async function createQuiz(file){
 async function startReview(){
     isReview = true;
     try{
-        const res = await apiFetch(SERVER + "/review");
+        const res = await apiFetch("/review");
         if(!res.ok){
             throw new Error("サーバーに断られました");
         }
@@ -117,7 +117,7 @@ function showResult(result){
 
 async function sendAnswer(choice){
     try {
-        const res = await apiFetch(SERVER + "/answer", {
+        const res = await apiFetch("/answer", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ quiz_id: quizId, choice: choice })
@@ -152,7 +152,7 @@ function playSfx(id){
 
 async function loadStats(){
     try{
-        const res = await apiFetch(SERVER + "/stats");
+        const res = await apiFetch("/stats");
         if(!res.ok){
             throw new Error("サーバーに断られました");
         }
@@ -168,7 +168,7 @@ async function loadStats(){
 
 async function loadWords(){
      try {
-        const res = await apiFetch(SERVER + "/words");
+        const res = await apiFetch("/words");
         if (!res.ok) {
             throw new Error("サーバーに断られました");
         }
