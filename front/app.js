@@ -174,7 +174,7 @@ function showWordDetail(w){
 }
 
 function renderFilter(){
-    const filter = document.getElementById("category-filter");
+    const filter = document.getElementById("filterbox");
     filter.innerHTML = "";
 
     const categories = ["すべて", ...new Set(allWords.map((w) => w.category || "その他"))];
