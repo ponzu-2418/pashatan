@@ -174,6 +174,7 @@ async function loadWords(){
         }
         const words = await res.json();
         document.getElementById("word-count").textContent = words.length + "個の単語を集めたよ";
+        words.sort((a,b) => (a.category || "その他").localeCompare(b.category || "その他"));
         allWords = words;
         renderFilter();
         renderWords();
@@ -232,7 +233,7 @@ function renderWords(){
     const list = document.getElementById("record-list");
     list.innerHTML = "";
 
-    words.sort((a,b) => (a.category || "その他").localeCompare(b.category || "その他"));
+    
 
     let lastCategory = null;
 
