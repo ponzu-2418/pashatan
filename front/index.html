@@ -42,9 +42,101 @@
             <div class="bottom">
                 <label for="photo-input" class="main-button">写真を撮る</label>
                 <input type="file" id="photo-input" accept="image/*" capture="environment" hidden>
-                <button id="record" class="sub-button">記録を見る</button>
+                <div class="home-sub-buttons">
+                    <button id="record" class="sub-button">記録を見る</button>
+                    <button id="open-encyclopedia" class="sub-button">図鑑を見る</button>
+            
+                </div>
             </div>
             <p id="error"></p>
+        </section>
+        
+    <!-- ==========================
+         図鑑トップ画面
+    ========================== -->
+        <section id="screen-encyclopedia" class="screen">
+
+            <div class="top encyclopedia-top">
+
+            <div class="encyclopedia-header">
+                <h1>図鑑</h1>
+                <span id="encyclopedia-total">0 / 0語</span>
+            </div>
+
+            <!-- カテゴリーカードをJavaScriptで生成 -->
+            <div id="encyclopedia-categories"
+                 class="encyclopedia-categories">
+            </div>
+
+            <p class="encyclopedia-description">
+                カテゴリを押すと、その単語帳が開きます
+            </p>
+
+        </div>
+
+        <div class="bottom">
+            <button id="encyclopedia-home"
+            class="sub-button">
+                タイトルへ
+            </button>
+        </div>
+
+    </section>
+
+
+    <!-- ==========================
+         カテゴリー詳細画面
+    ========================== -->
+    <section id="screen-category-detail" class="screen">
+
+        <div class="top category-detail-top">
+
+            <div class="category-detail-header">
+                <button id="category-back"
+                    class="category-back-button"
+                    aria-label="図鑑に戻る">
+                    ‹   
+                </button>
+
+                <h1 id="category-title">日用品</h1>
+
+                <span id="category-progress">
+                    0 / 0語
+                </span>
+            </div>
+
+            <!-- 表示切り替え -->
+            <div class="category-tabs">
+                <button class="category-tab active"
+                    data-filter="all">
+                    すべて
+                </button>
+
+                <button class="category-tab"
+                    data-filter="collected">
+                    発見済み
+                </button>
+
+                <button class="category-tab"
+                    data-filter="missing">
+                    未発見
+                </button>
+            </div>
+
+            <!-- 単語カードをJavaScriptで生成 -->
+            <div id="category-word-list"
+             class="category-word-list">
+            </div>
+
+            </div>
+
+            <div class="bottom">
+                <button id="category-return"
+                    class="sub-button">
+                    図鑑に戻る
+                </button>
+            </div>
+
         </section>
 
         <section id="screen-judge" class="screen">
