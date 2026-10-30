@@ -162,7 +162,7 @@ span{
 }
 
 #sub-title{
-    margin-bottom:90px;
+    margin-bottom:24px;
 }
 
 #explan,#detail-explan{
@@ -417,4 +417,126 @@ span{
 .chip.active .chip-count{
     background: white;
     color: rgb(179, 85, 2);
+}
+
+
+/* ==========================
+   スタンプカード
+========================== */
+
+.stamp-card {
+    width: calc(100vw - 48px);
+    max-width: 400px;
+    padding: 18px 14px;
+    background: #fffdf8;
+    border: 3px solid #d9d9d9;
+    border-radius: 18px;
+    color: #3b3531;
+}
+
+/* カード上部 */
+.stamp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.stamp-header h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+/* 連続撮影日数 */
+#stamp-streak {
+    flex-shrink: 0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: #ffe3cf;
+    color: #3b3531;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+/* 7日分のスタンプを横並び */
+.stamp-list {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+}
+
+/* 1日分のスタンプ */
+.stamp-day {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+/* スタンプを押す枠 */
+.stamp-slot {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 2px solid #dedede;
+    border-radius: 12px;
+    color: #3b3531;
+    font-size: 10px;
+    font-weight: 900;
+}
+
+/* 撮影済み */
+.stamp-day.completed .stamp-slot {
+    border: 3px solid #ef5a2c;
+    border-radius: 50%;
+    color: #ef5a2c;
+    transform: rotate(-12deg);
+}
+
+/* 今日の枠 */
+.stamp-day.today .stamp-slot {
+    border: 2px dashed #ff7700;
+    background: #fff5e8;
+    color: #ff7700;
+}
+
+/* 日数表示 */
+.stamp-day-label {
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* カード下部の説明 */
+.stamp-description {
+    margin: 16px 0 0;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* 小さいスマホへの対応 */
+@media (max-width: 360px) {
+    .stamp-card {
+        width: calc(100vw - 32px);
+        padding: 14px 10px;
+    }
+
+    .stamp-list {
+        gap: 3px;
+    }
+
+    .stamp-day-label {
+        font-size: 10px;
+    }
+
+    .stamp-description {
+        font-size: 11px;
+    }
 }
