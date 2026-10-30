@@ -563,3 +563,419 @@ document.addEventListener("click", () => {
         });
     });
 }, { once: true });
+
+/* ==========================
+   図鑑機能：ここから追加
+========================== */
+
+// 図鑑のデータと表示状態
+let zukanData = [];
+let selectedZukanCategory = null;
+let zukanFilter = "all";
+let zukanRequestId = 0;
+
+// HTMLの表示先
+const zukanCategories = document.getElementById(
+    "encyclopedia-categories"
+);
+
+const zukanWordList = document.getElementById(
+    "category-word-list"
+);
+
+const zukanTabs = document.querySelectorAll(
+    ".category-tab"
+);
+
+
+/* --------------------------
+   案内メッセージ
+-------------------------- */
+
+function showZukanMessage(container, message) {
+    container.replaceChildren();
+
+    const text = document.createElement("p");
+    text.className = "zukan-message";
+    text.textContent = message;
+
+    container.append(text);
+}
+
+
+/* --------------------------
+   図鑑を開く・APIから取得
+-------------------------- */
+
+async function openZukan() {
+    const requestId = ++zukanRequestId;
+
+    showScreen("screen-encyclopedia");
+
+    document.getElementById("encyclopedia-total").textContent =
+        "読み込み中";
+
+    showZukanMessage(
+        zukanCategories,
+        "図鑑を読み込んでいます…"
+    );
+
+    try {
+        // 既存のapiFetchでユーザーIDも送信される
+        const res = await apiFetch("/zukan");
+
+        if (!res.ok) {
+            throw new Error(
+                `図鑑の取得に失敗しました (${res.status})`
+            );
+        }
+
+        const data = await res.json();
+
+        // 古い通信結果で表示を上書きしない
+        if (requestId !== zukanRequestId) return;
+
+        if (
+            !Array.isArray(data) ||
+            !data.every((category) =>
+                Array.isArray(category.words) &&
+                Number.isFinite(category.total) &&
+                Number.isFinite(category.collected)
+            )
+        ) {
+            throw new Error("図鑑のデータ形式が正しくありません");
+        }
+
+        zukanData = data;
+        renderZukanCategories();
+
+    } catch (error) {
+        if (requestId !== zukanRequestId) return;
+
+        console.error(error);
+
+        document.getElementById("encyclopedia-total").textContent =
+            "取得失敗";
+
+        showZukanMessage(
+            zukanCategories,
+            "図鑑を読み込めませんでした。タイトルに戻って、もう一度開いてください。"
+        );
+    }
+}
+
+
+/* --------------------------
+   図鑑トップ：カテゴリ一覧
+-------------------------- */
+
+function renderZukanCategories() {
+    zukanCategories.replaceChildren();
+
+    // 全カテゴリの合計
+    const total = zukanData.reduce(
+        (sum, category) => sum + category.total,
+        0
+    );
+
+    const collected = zukanData.reduce(
+        (sum, category) => sum + category.collected,
+        0
+    );
+
+    document.getElementById("encyclopedia-total").textContent =
+        `${collected} / ${total}語`;
+
+    document.querySelector(
+        "#screen-encyclopedia .encyclopedia-description"
+    ).textContent = "カテゴリを押すと、その単語帳が開きます";
+
+    if (zukanData.length === 0) {
+        showZukanMessage(
+            zukanCategories,
+            "まだカテゴリがありません。"
+        );
+        return;
+    }
+
+    zukanData.forEach((category) => {
+        const remaining = category.total - category.collected;
+
+        const isEmpty = category.collected === 0;
+
+        // 残り1〜2語ならオレンジ枠で強調
+        const isNearComplete =
+            !isEmpty &&
+            remaining > 0 &&
+            remaining <= 2;
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "encyclopedia-card";
+
+        if (isEmpty) {
+            button.classList.add("is-empty");
+        } else if (isNearComplete) {
+            button.classList.add("is-near-complete");
+        }
+
+        // カテゴリ名
+        const name = document.createElement("p");
+        name.className = "encyclopedia-name";
+        name.textContent = category.category || "その他";
+
+        // 収集数・残りの数
+        const count = document.createElement("p");
+        count.className = "encyclopedia-count";
+
+        if (isEmpty) {
+            count.textContent = "まだ0語・撮ってみよう";
+        } else {
+            const number = document.createElement("span");
+            number.textContent =
+                `${category.collected} / ${category.total}`;
+
+            count.append(number);
+
+            if (isNearComplete) {
+                const message = document.createElement("span");
+                message.className = "encyclopedia-remaining";
+                message.textContent = `あと${remaining}語！`;
+
+                count.append(message);
+            }
+        }
+
+        // 進捗バー
+        const progress = document.createElement("progress");
+        progress.className = "encyclopedia-progress";
+        progress.max = Math.max(category.total, 1);
+        progress.value = category.collected;
+
+        progress.setAttribute(
+            "aria-label",
+            `${name.textContent}：${category.total}語中${category.collected}語発見済み`
+        );
+
+        // アイコンなし：名前→件数→進捗バー
+        button.append(name, count, progress);
+
+        // 0語のカテゴリも開ける
+        button.addEventListener("click", () => {
+            openZukanCategory(category);
+        });
+
+        zukanCategories.append(button);
+    });
+}
+
+
+/* --------------------------
+   カテゴリ詳細を開く
+-------------------------- */
+
+function openZukanCategory(category) {
+    selectedZukanCategory = category;
+    zukanFilter = "all";
+
+    document.getElementById("category-title").textContent =
+        category.category || "その他";
+
+    document.getElementById("category-progress").textContent =
+        `${category.collected} / ${category.total}語`;
+
+    updateZukanTabs();
+    renderZukanWords();
+
+    showScreen("screen-category-detail");
+}
+
+
+/* --------------------------
+   タブの表示・件数を更新
+-------------------------- */
+
+function updateZukanTabs() {
+    if (!selectedZukanCategory) return;
+
+    const words = selectedZukanCategory.words;
+
+    const foundCount = words.filter(
+        (word) => word.found
+    ).length;
+
+    const labels = {
+        all: `すべて (${words.length})`,
+        collected: `発見済み (${foundCount})`,
+        missing: `未発見 (${words.length - foundCount})`
+    };
+
+    zukanTabs.forEach((tab) => {
+        const filter = tab.dataset.filter;
+        const active = filter === zukanFilter;
+
+        tab.classList.toggle("active", active);
+        tab.setAttribute("aria-pressed", String(active));
+        tab.textContent = labels[filter];
+    });
+}
+
+
+/* --------------------------
+   写真がない場合の表示
+-------------------------- */
+
+function createZukanPhotoPlaceholder(label) {
+    const placeholder = document.createElement("div");
+    placeholder.className = "zukan-word-lock";
+    placeholder.textContent = "📷";
+    placeholder.setAttribute("role", "img");
+    placeholder.setAttribute("aria-label", label);
+
+    return placeholder;
+}
+
+
+/* --------------------------
+   カテゴリ詳細：単語一覧
+-------------------------- */
+
+function renderZukanWords() {
+    if (!selectedZukanCategory) return;
+
+    zukanWordList.replaceChildren();
+
+    // 選択中のタブに合わせて絞り込む
+    const words = selectedZukanCategory.words.filter((word) => {
+        if (zukanFilter === "collected") {
+            return word.found;
+        }
+
+        if (zukanFilter === "missing") {
+            return !word.found;
+        }
+
+        return true;
+    });
+
+    // 該当する単語がない場合
+    if (words.length === 0) {
+        const messages = {
+            all: "このカテゴリにはまだ単語がありません。",
+            collected:
+                "まだ発見した単語がありません。写真を撮って集めよう！",
+            missing:
+                "このカテゴリの単語はすべて発見済みです！"
+        };
+
+        showZukanMessage(
+            zukanWordList,
+            messages[zukanFilter]
+        );
+
+        return;
+    }
+
+    const fragment = document.createDocumentFragment();
+
+    words.forEach((word) => {
+        const card = document.createElement("div");
+        card.className = "zukan-word-card";
+
+        if (word.found) {
+            // 発見済み：写真と英語を表示
+            if (word.image_url) {
+                const image = document.createElement("img");
+                image.className = "zukan-word-photo";
+                image.src = SERVER + word.image_url;
+                image.alt = word.japanese;
+                image.loading = "lazy";
+
+                // 写真を読み込めなかった場合
+                image.addEventListener("error", () => {
+                    image.replaceWith(
+                        createZukanPhotoPlaceholder(
+                            "写真を表示できません"
+                        )
+                    );
+                }, { once: true });
+
+                card.append(image);
+
+            } else {
+                card.append(
+                    createZukanPhotoPlaceholder("写真なし")
+                );
+            }
+
+            const english = document.createElement("p");
+            english.className = "zukan-word-en";
+            english.textContent = word.word;
+
+            card.append(english);
+
+        } else {
+            // 未発見：英語と写真は表示しない
+            card.classList.add("is-missing");
+
+            const lock = document.createElement("div");
+            lock.className = "zukan-word-lock";
+            lock.textContent = "🔒";
+            lock.setAttribute("aria-hidden", "true");
+
+            const status = document.createElement("p");
+            status.className = "zukan-word-status";
+            status.textContent = "未発見";
+
+            card.append(lock, status);
+        }
+
+        // 日本語は発見済み・未発見の両方に表示
+        const japanese = document.createElement("p");
+        japanese.className = "zukan-word-ja";
+        japanese.textContent = word.japanese;
+
+        card.append(japanese);
+        fragment.append(card);
+    });
+
+    zukanWordList.append(fragment);
+}
+
+
+/* --------------------------
+   ボタンの操作
+-------------------------- */
+
+// ホーム → 図鑑
+document.getElementById("open-encyclopedia")
+    .addEventListener("click", openZukan);
+
+// 図鑑 → ホーム
+document.getElementById("encyclopedia-home")
+    .addEventListener("click", () => {
+        showScreen("screen-title");
+    });
+
+// カテゴリ詳細 → 図鑑
+["category-back", "category-return"].forEach((id) => {
+    document.getElementById(id).addEventListener("click", () => {
+        showScreen("screen-encyclopedia");
+    });
+});
+
+// すべて・発見済み・未発見の切替
+zukanTabs.forEach((tab) => {
+    tab.type = "button";
+
+    tab.addEventListener("click", () => {
+        zukanFilter = tab.dataset.filter;
+
+        updateZukanTabs();
+        renderZukanWords();
+    });
+});
+
+/* ==========================
+   図鑑機能：ここまで
+========================== */
