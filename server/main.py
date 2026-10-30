@@ -187,6 +187,29 @@ def get_words(user_id: str = Header("guest", alias="X-User-Id")):  # ★ ID を�
     # 最後に出た日が新しい順に並べる
     return sorted(book.values(), key=lambda b: b["last_seen"], reverse=True)
 
+# ⑥ 図鑑：カテゴリごとの全部の単語数と、その人が集めた数
+@app.get("/categories")
+def get_categories(user_id: str = Header("guest", alias="X-User-Id")):
+    # カテゴリごとの全部の単語数を数える
+    total = {}
+    for w in WORDS:
+        c = EXTRA.get(w, {}).get("category", "その他")
+        total[c] = total.get(c, 0) + 1
+
+    # その人が集めた単語（同じ単語は1つとして数える）
+    collected_words = {r["word"] for r in load_records(user_id) if r["word"] in WORDS}
+
+    # 集めた単語を、カテゴリごとに数える
+    collected = {}
+    for w in collected_words:
+        c = EXTRA.get(w, {}).get("category", "その他")
+        collected[c] = collected.get(c, 0) + 1
+
+    return [
+        {"category": c, "total": total[c], "collected": collected.get(c, 0)}
+        for c in total
+    ]
+
 # ⑤ 復習：間違えた単語を、前に撮った写真でもう一度出題する
 @app.get("/review")
 def get_review(user_id: str = Header("guest", alias="X-User-Id")):  # ★ ID を受け取る
