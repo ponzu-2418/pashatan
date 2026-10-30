@@ -1,6 +1,6 @@
 # server/main.py（仮サーバー：決まった値を返すだけ）
 import os
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -100,7 +100,7 @@ def create_quiz(image: UploadFile = File(...)):
 
 # ② 答え合わせ
 @app.post("/answer")
-def check_answer(data: Answer):
+def check_answer(data: Answer, user_id: str = Header("guest", alias="X-User-Id")):  # ★ ID を受け取る
     # 問題を取り出す（pop なので、同じ問題に2回は答えられない）
     quiz = QUIZZES.pop(data.quiz_id, None)
     if quiz is None:
@@ -113,11 +113,11 @@ def check_answer(data: Answer):
 
     # 今日の1問目かどうか（エフェクト用）を、記録する前に調べておく
     today = datetime.now().strftime("%Y-%m-%d")
-    first_today = not any(r["datetime"].startswith(today) for r in load_records())
+    first_today = not any(r["datetime"].startswith(today) for r in load_records(user_id))  # ★
 
     # 記録して、連続日数を数える
-    save_record(answer, correct, quiz["image_url"])
-    streak = calc_streak(load_records())
+    save_record(answer, correct, quiz["image_url"], user_id)  # ★
+    streak = calc_streak(load_records(user_id))                # ★
 
     return {
         "correct": correct,
@@ -132,8 +132,8 @@ def check_answer(data: Answer):
 
 # ③ 記録を見る
 @app.get("/stats")
-def get_stats():
-    records = load_records()
+def get_stats(user_id: str = Header("guest", alias="X-User-Id")):  # ★ ID を受け取る
+    records = load_records(user_id)                                   # ★ その人の記録だけ
     today = datetime.now().strftime("%Y-%m-%d")
 
     # 正答率（単語ごとの最後の結果で計算する）
@@ -162,9 +162,9 @@ def get_stats():
 
 # ④ 単語帳
 @app.get("/words")
-def get_words():
+def get_words(user_id: str = Header("guest", alias="X-User-Id")):  # ★ ID を受け取る
     book = {}   # 単語 → その単語の集計
-    for r in load_records():
+    for r in load_records(user_id):                                   # ★ その人の記録だけ
         w = r["word"]
         if w not in WORDS:
             continue   # 単語リストから消した単語は飛ばす
@@ -189,11 +189,11 @@ def get_words():
 
 # ⑤ 復習：間違えた単語を、前に撮った写真でもう一度出題する
 @app.get("/review")
-def get_review():
+def get_review(user_id: str = Header("guest", alias="X-User-Id")):  # ★ ID を受け取る
     global next_id
 
     # 復習が必要な単語を集める（単語リストから消した単語は除く）
-    targets = [r for r in review_list(load_records()) if r["word"] in WORDS]
+    targets = [r for r in review_list(load_records(user_id)) if r["word"] in WORDS]  # ★
     if not targets:
         return {"quiz_id": None, "remaining": 0}
 
