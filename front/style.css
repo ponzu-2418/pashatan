@@ -1034,3 +1034,14 @@ span{
         gap: 8px;
     }
 }
+
+/* 未発見カードのパシャ単キャラクター */
+.zukan-mascot {
+    display: block;
+    width: 76px;
+    max-width: 80%;
+    height: auto;
+    margin: 0;
+    opacity: 0.45;
+    filter: grayscale(1);
+}

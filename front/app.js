@@ -920,8 +920,11 @@ function renderZukanWords() {
 
             const lock = document.createElement("div");
             lock.className = "zukan-word-lock";
-            lock.textContent = "🔒";
-            lock.setAttribute("aria-hidden", "true");
+            // ホーム画面のキャラクターをコピー
+            const mascot = document.querySelector("#screen-title .mascot").cloneNode(true);
+
+            mascot.removeAttribute("id");
+            mascot.setAttribute("class", "zukan-mascot");
 
             const status = document.createElement("p");
             status.className = "zukan-word-status";
