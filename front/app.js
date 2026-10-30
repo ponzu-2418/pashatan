@@ -198,7 +198,7 @@ function showScreen(id){
         screen.classList.remove("active");
     });
     document.getElementById(id).classList.add("active");
-    
+
     // ホーム画面に戻ったときに更新
     if (id === "screen-title") {
         renderStampCard();
@@ -309,6 +309,14 @@ async function sendAnswer(choice){
             throw new Error("サーバーに断られました");
         }
         const result = await res.json();
+            // 復習問題に回答したらスタンプを付与
+        if (isReview) {
+            try {
+            addStamp();
+            } catch (error) {
+                console.error("スタンプの保存に失敗しました", error);
+            }
+        }
         showResult(result);
     } catch (error) {
         console.error(error);
