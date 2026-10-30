@@ -925,6 +925,7 @@ function renderZukanWords() {
 
             mascot.removeAttribute("id");
             mascot.setAttribute("class", "zukan-mascot");
+            lock.append(mascot);
 
             const status = document.createElement("p");
             status.className = "zukan-word-status";
