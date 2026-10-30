@@ -1,29 +1,66 @@
-import csv
-import os
+import sqlite3
 from datetime import datetime, date, timedelta
 
-RECORDS_FILE = "records.csv"
+DB_FILE = "pashatan.db"   # データベースのファイル名
+
+
+# データベースにつなぐ
+def get_conn():
+    conn = sqlite3.connect(DB_FILE)
+    conn.row_factory = sqlite3.Row   # 列の名前で取り出せるようにする（r["word"] のように）
+    return conn
+
+
+# 表がなければ作る（サーバーの起動時に1回だけ動く）
+def init_db():
+    conn = get_conn()
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS records (
+            id        INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id   TEXT    NOT NULL,
+            datetime  TEXT    NOT NULL,
+            word      TEXT    NOT NULL,
+            correct   INTEGER NOT NULL,
+            image_url TEXT    NOT NULL
+        )
+    """)
+    conn.commit()
+    conn.close()
+
+init_db()
 
 
 # 記録を読む：その人（user_id）の記録だけを返す
-def load_records(user_id):                                   # ★ user_id を受け取る
-    if not os.path.exists(RECORDS_FILE):
-        return []
-    with open(RECORDS_FILE, encoding="utf-8-sig") as f:
-        rows = list(csv.DictReader(f))
-    return [r for r in rows if r["user_id"] == user_id]      # ★ その人の行だけ
+def load_records(user_id):
+    conn = get_conn()
+    rows = conn.execute(
+        "SELECT datetime, word, correct, image_url, user_id FROM records WHERE user_id = ? ORDER BY id",
+        (user_id,),
+    ).fetchall()
+    conn.close()
+    # CSV のときと同じ形（文字の辞書のリスト）にして返す
+    return [
+        {
+            "datetime": r["datetime"],
+            "word": r["word"],
+            "correct": str(r["correct"]),   # CSV のときは "1" / "0" の文字だったので合わせる
+            "image_url": r["image_url"],
+            "user_id": r["user_id"],
+        }
+        for r in rows
+    ]
 
 
-# 記録を書く：誰の記録か（user_id）も一緒に書く
-def save_record(word, correct, image_url, user_id):         # ★ user_id を受け取る
-    is_new = not os.path.exists(RECORDS_FILE) or os.path.getsize(RECORDS_FILE) == 0
-    with open(RECORDS_FILE, "a", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f)
-        if is_new:
-            writer.writerow(["datetime", "word", "correct", "image_url", "user_id"])  # ★ 見出しに user_id
-        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        writer.writerow([now, word, int(correct), image_url, user_id])            # ★ 最後に user_id
-
+# 記録を書く：表に1行足す
+def save_record(word, correct, image_url, user_id):
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    conn = get_conn()
+    conn.execute(
+        "INSERT INTO records (user_id, datetime, word, correct, image_url) VALUES (?, ?, ?, ?, ?)",
+        (user_id, now, word, int(correct), image_url),
+    )
+    conn.commit()   # 書いた内容を確定する
+    conn.close()
 
 # 連続日数を数える（変更なし）
 def calc_streak(records):
