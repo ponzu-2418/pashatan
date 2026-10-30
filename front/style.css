@@ -843,3 +843,194 @@ span{
         font-size: 11px;
     }
 }
+
+/* ==========================
+   図鑑：カテゴリ詳細
+========================== */
+
+/* 見出し */
+.category-detail-header {
+    flex-wrap: wrap;
+}
+
+.category-detail-header h1 {
+    flex: 1;
+    min-width: 0;
+    font-size: 22px;
+    overflow-wrap: anywhere;
+}
+
+/* 左上の戻るボタン */
+.category-back-button {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 2px solid #d9d9d9;
+    border-radius: 14px;
+    background: white;
+    color: #695749;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* すべて・発見済み・未発見 */
+.category-tabs {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.category-tab {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 4px;
+    border: 2px solid #d9d9d9;
+    border-radius: 14px;
+    background: white;
+    color: #796b5e;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.category-tab.active {
+    border-color: #ff7700;
+    background: #ff7700;
+    color: white;
+}
+
+/* 単語カードを2列に配置 */
+.category-word-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+}
+
+/* 単語カード */
+.zukan-word-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    padding: 10px 10px 14px;
+    border: 3px solid #d9d9d9;
+    border-radius: 18px;
+    background: white;
+    text-align: center;
+}
+
+/* 発見済みの写真 */
+.zukan-word-photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #f3eee5;
+}
+
+.zukan-word-en {
+    margin: 4px 0 0;
+    font-size: 18px;
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.zukan-word-ja {
+    margin: 0;
+    font-size: 13px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+/* 未発見カード */
+.zukan-word-card.is-missing {
+    border-style: dashed;
+    background: #f2ede3;
+    color: #82776a;
+}
+
+.zukan-word-lock {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    background: #e8e1d5;
+    color: #82776a;
+    font-size: 34px;
+}
+
+.zukan-word-status {
+    margin: 4px 0 0;
+    color: #82776a;
+    font-size: 12px;
+}
+
+/* 読み込み中・該当なし・エラー */
+.zukan-message {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin: 0;
+    padding: 28px 12px;
+    color: #796b5e;
+    font-size: 14px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+/* 下部の戻るボタン */
+#screen-category-detail > .bottom {
+    width: 100%;
+    max-width: 400px;
+    margin-top: auto;
+}
+
+#category-return {
+    width: 100%;
+    margin: 0;
+    font-family: inherit;
+    color: #3b3531;
+}
+
+/* キーボード操作 */
+.category-back-button:focus-visible,
+.category-tab:focus-visible {
+    outline: 3px solid #9c4c13;
+    outline-offset: 3px;
+}
+
+/* 小さいスマホ */
+@media (max-width: 360px) {
+    .category-detail-header {
+        gap: 8px;
+    }
+
+    .category-detail-header h1 {
+        font-size: 18px;
+    }
+
+    #category-progress {
+        padding: 5px 8px;
+        font-size: 12px;
+    }
+
+    .category-tabs {
+        gap: 4px;
+    }
+
+    .category-tab {
+        font-size: 12px;
+    }
+
+    .category-word-list {
+        gap: 8px;
+    }
+}
