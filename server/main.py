@@ -210,6 +210,40 @@ def get_categories(user_id: str = Header("guest", alias="X-User-Id")):
         for c in total
     ]
 
+# ⑦ 図鑑（くわしく）：カテゴリごとの全部の単語と、発見済みかどうか
+@app.get("/zukan")
+def get_zukan(user_id: str = Header("guest", alias="X-User-Id")):
+    # その人が見つけた単語と、その最新の写真
+    found = {}
+    for r in load_records(user_id):
+        if r["word"] in WORDS:
+            found[r["word"]] = r["image_url"]   # あとの記録で上書き → 最新の写真
+
+    # カテゴリごとに、全部の単語を並べる
+    zukan = {}
+    for w in WORDS:
+        c = EXTRA.get(w, {}).get("category", "その他")
+        if c not in zukan:
+            zukan[c] = []
+        zukan[c].append({
+            "word": w,
+            "japanese": WORDS[w]["japanese"],
+            "found": w in found,              # 見つけていれば True
+            "image_url": found.get(w),        # 見つけていなければ None
+        })
+
+    # カテゴリごとに、数も付けて返す
+    result = []
+    for c, words in zukan.items():
+        found_words = [x for x in words if x["found"]]
+        result.append({
+            "category": c,
+            "total": len(words),
+            "collected": len(found_words),
+            "words": words,
+        })
+    return result
+
 # ⑤ 復習：間違えた単語を、前に撮った写真でもう一度出題する
 @app.get("/review")
 def get_review(user_id: str = Header("guest", alias="X-User-Id")):  # ★ ID を受け取る
